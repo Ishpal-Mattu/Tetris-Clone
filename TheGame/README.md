@@ -4,9 +4,43 @@
 
 In this puzzle game, there will be shapes falling from the top of the world. The shapes are formed using multiple small square blocks and the shapes are of different forms. The player has to strategically place those falling shapes on the ground in the goal to make a connecting line of small square blocks. Once a line is formed, that line gets removed and the blocks on top of that line falls down. Points are awarded for each line formed. Once a certain amount of points are reached, the level is increased. Higher the level, faster the shapes will fall giving less time for the player to think and act. Once the placed shapes build a tower exceeding top of the world (line where shapes start to fall), the game ends and the score is shown to the player. If the score is among the top five highscores, the player is asked for his nickname and his score gets placed in the highscore leaderboard. 
 
+Also, the player's cuurent score & current level is always displayed somewhere outside the playing area (either at the **top right** or **top left**). Another information displayed outside the playing area is the next shape that will fall. 
+
 ## 🕹️ Gameplay
 
 Game begins by 1 shape falling from the sky. As the shape is falling, the player can do multiple things:
 1. Move the falling shape one block to the left using the `left arrow key`.
 2. Move the falling shape one block to the right using the `right arrow key`.
-3. Rotate the falling shape using the `up arrow key`
+3. Rotate the falling shape using the `up arrow key`.
+4. Make the shape fall faster using the `down arrow key`.
+
+There are two ways the player can gain points:
+1. The main way is to form a line of blocks by placing the shapes strategically.
+2. A second way is to make the falling shapes fall faster by clicking the down arrow key. Since this is just a way to increase the level faster if the player finds the first few levels too easy, the points awarded by this function are low. Awarding points by this method would be something along the lines of every **X** seconds the player **holds** the **down** arrow key, he gains **1 point**.
+
+Once the falling shape touches a already placed block, that falling shape stops falling and gets placed at that position. Once a shape is placed, another one starts falling from the sky and so on until the player reaches a high enough level that he cannot handle the speed at which the blocks are falling and is unable to place the falling blocks well making them pile up to the sky. Once the blocks do pile up to the sky, the game is over.
+
+Throughout the game, the player can click `M` on their keyboard at any time to mute all game sounds. Clicking `M` again when the game is already muted will enable all game sounds.
+
+## 📃 Requirements
+
+1. The player shall move the falling shape left or right.
+2. The player shall rotate the falling shape.
+3. The player shall not move the already placed blocks.
+4. The player shall not rotate the already placed blocks.
+5. The system shall make 1 shape fall at a time.
+6. The system shall only make a block fall in the playing area.
+7. The system shall clearly show what is the playing area.
+8. The system shall always show and keep up to date the player's score.
+9. The system shall always show and keep up to date the player's level.
+10. The system shall show the next shape to fall.
+11. The system shall set the falling speed of shapes depending on the level number. (Higher the level, faster the speed)
+12. The system shall prevent falling shape to be moved outside the playing area.
+13. The system shall place the falling shape once it touches an already placed block.
+14. The system shall assign points to the player on each formed line of blocks.
+15. The system shall remove each formed line of blocks.
+16. After a formed line removal, the system should move down all the blocks at the top of that line by 1 block.
+17. The system shall make another shape fall from the sky after the current falling shape has been placed.
+18. The player shall speed up the fall of a falling shape.
+19. The system shall awward the player a small amount of points for speeding up the fall of a falling shape.
+20. 
