@@ -42,5 +42,15 @@ Throughout the game, the player can click `M` on their keyboard at any time to m
 16. After a formed line removal, the system should move down all the blocks at the top of that line by 1 block.
 17. The system shall make another shape fall from the sky after the current falling shape has been placed.
 18. The player shall speed up the fall of a falling shape.
-19. The system shall awward the player a small amount of points for speeding up the fall of a falling shape.
-20. 
+19. The system shall award the player a small amount of points for speeding up the fall of a falling shape.
+20. The system shall keep track of all of the player's highscores.
+21. The game shall have a title screen with three options: 1 that leads to the actual game, 1 that leads to the game instructions and 1 that leads to the highscore board.
+22. The game shall have a game over screen with the high score board displayed.
+23. On game over, if the player manages to hit a highscore, the system shall ask him his nickname to display his score on the highscore board.
+
+### 🤖 State Diagram
+
+#### 🎮 Game State
+![Game State Diagram](./images/GameStateDiagram.png)
+
+#### 
