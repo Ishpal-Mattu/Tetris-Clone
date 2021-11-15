@@ -51,6 +51,13 @@ Throughout the game, the player can click `M` on their keyboard at any time to m
 ### 🤖 State Diagram
 
 #### 🎮 Game State
-![Game State Diagram](./images/GameStateDiagram.png)
+![Game State Diagram](./images/GameStateDiagram.jpg)
 
-#### 
+#### 🧱 Shape State
+![Shape State Diagram](./images/ShapeState.png)
+
+### Class Diagram
+![Class Diagram](./images/ClassDiagram.png)
+
+
+
