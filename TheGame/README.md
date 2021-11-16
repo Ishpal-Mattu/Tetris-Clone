@@ -1,4 +1,4 @@
-# Game Programming F21 Project - Geotris
+# Game Programming F21 Project - Tetris
 
 ## ✒️ Description
 
@@ -56,8 +56,73 @@ Throughout the game, the player can click `M` on their keyboard at any time to m
 #### 🧱 Shape State
 ![Shape State Diagram](./images/ShapeState.png)
 
-### Class Diagram
+### 🗺️ Class Diagram
 ![Class Diagram](./images/ClassDiagram.png)
+
+### 🧵 Wireframes
+#### Main Menu
+![MainMenu](./images/MenuScreen.jpg)
+- _Start_ will navigate to the main game
+- _High Score_ will navigate to the high score screen
+- _How to play_ will navigate to the how-to-play screen
+
+#### High Score Screen
+![HighScore](./images/HighScoreScreen.jpg)
+
+#### How To Play Screen
+![Instructions](./images/InstructionsScreen.jpg)
+
+#### Main Game
+![PlayState](./images/Playstate.jpg)
+
+#### High Score Enter
+![High Score Enter](./images/HighScoreEnter.jpg)
+
+#### Game Over Screen
+![Game Over](./images/GameOver.jpg)
+
+### 🎨 Assets
+
+I hand drawn the wireframes to better reflect how the actual game will look like and to better show the UI and the functionality of the game.
+
+I plan on mostly using assets from [itch](https://itch.io/) or [opengameart](https://opengameart.org/).
+
+The GUI will be kept easy to use. There will be an option to learn how to play in the menu for new players.
+
+#### 🖼️ Images
+
+These are mostly the images that will be used:
+
+*Blocks:*
+![black](./images/blockBlack) - ![Blue](./images/blockBlue)
+![Green](./images/blockGreen) - ![Lightblue](./images/blockLightblue)
+![Orange](./images/blockOrange) - ![Purple](./images/blockPurple)
+![Red](./images/blockRed) - ![Yellow](./images/blockYellow)
+
+
+
+
+
+
+More images might be used if needed
+
+#### ✏️ Fonts
+
+For fonts, a simple sans-serif like Roboto will look quite nice. It's a font that is legible, light on storage size, and fun to keep with the theme we're going for. We also used a more cartoonish Pokemon font for the title screen.
+
+- [Pokemon](https://www.dafont.com/pokemon.font)
+- [Roboto](https://fonts.google.com/specimen/Roboto)
+
+#### 🔊 Sounds
+
+All sounds were taken from [freesound.org](https://freesound.org) for the actions pertaining to cards.
+
+- [Shuffle cards](https://freesound.org/people/VKProduktion/sounds/217502/)
+- [Flip card](https://freesound.org/people/Splashdust/sounds/84322/)
+
+### 📚 References
+
+- [Pokemon Rulebook](http://assets.pokemon.com/assets/cms2/pdf/trading-card-game/rulebook/xy8-rulebook-en.pdf)
 
 
 
