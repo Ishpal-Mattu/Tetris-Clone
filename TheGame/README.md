@@ -94,10 +94,10 @@ The GUI will be kept easy to use. There will be an option to learn how to play i
 These are mostly the images that will be used:
 
 *Blocks:*
-![black](./images/blockBlack) - ![Blue](./images/blockBlue)
-![Green](./images/blockGreen) - ![Lightblue](./images/blockLightblue)
-![Orange](./images/blockOrange) - ![Purple](./images/blockPurple)
-![Red](./images/blockRed) - ![Yellow](./images/blockYellow)
+![black](./images/blockBlack.png) - ![Blue](./images/blockBlue.png)
+![Green](./images/blockGreen.png) - ![Lightblue](./images/blockLightblue.png)
+![Orange](./images/blockOrange.png) - ![Purple](./images/blockPurple.png)
+![Red](./images/blockRed.png) - ![Yellow](./images/blockYellow.png)
 
 
 
