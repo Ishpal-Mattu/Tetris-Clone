@@ -93,36 +93,50 @@ The GUI will be kept easy to use. There will be an option to learn how to play i
 
 These are mostly the images that will be used:
 
-*Blocks:*
-![black](./images/blockBlack.png) - ![Blue](./images/blockBlue.png)
-![Green](./images/blockGreen.png) - ![Lightblue](./images/blockLightblue.png)
-![Orange](./images/blockOrange.png) - ![Purple](./images/blockPurple.png)
-![Red](./images/blockRed.png) - ![Yellow](./images/blockYellow.png)
+**Blocks:**
+![black](./images/blockBlack.png) ![Blue](./images/blockBlue.png)
+![Green](./images/blockGreen.png) ![Lightblue](./images/blockLightblue.png)
+![Orange](./images/blockOrange.png) ![Purple](./images/blockPurple.png)
+![Red](./images/blockRed.png) ![Yellow](./images/blockYellow.png)
 
+**Game Frame**
+![Frame](./images/GameFrame.png)
 
+**Backgrounds**
+![GridBackground](./images/Dark-grid-background.png)
+![SkyBackground](./images/SkyBackground.jpg)
 
+**Title Image**
+![TetrisTitle](./images/title.png)
 
+More images might be used during the implentation.
 
-
-More images might be used if needed
+All of the above images are from the following sources
+- [Sky background - opengamemart.org](https://opengameart.org/content/cartoony-sky)
+- [Blocks, frame, grid background, title image - itch.io](https://fab08.itch.io/tetris)
 
 #### ✏️ Fonts
 
-For fonts, a simple sans-serif like Roboto will look quite nice. It's a font that is legible, light on storage size, and fun to keep with the theme we're going for. We also used a more cartoonish Pokemon font for the title screen.
+For fonts, a retro gaming type font will be used. A more bold and darker font like might also be used
 
-- [Pokemon](https://www.dafont.com/pokemon.font)
-- [Roboto](https://fonts.google.com/specimen/Roboto)
+- [Joystix](./fonts/Joystix.ttf)
+- [Tank](./fonts/tank.ttf)
 
 #### 🔊 Sounds
 
-All sounds were taken from [freesound.org](https://freesound.org) for the actions pertaining to cards.
+Menu, Line removal and Shape placed sounds were taken from [https://fab08.itch.io/tetris](https://fab08.itch.io/tetris).
+Game background music was taking from [freesound.org](https://freesound.org/people/BloodPixelHero/sounds/580898/)
 
-- [Shuffle cards](https://freesound.org/people/VKProduktion/sounds/217502/)
-- [Flip card](https://freesound.org/people/Splashdust/sounds/84322/)
+- [Menu background](./sounds/menu.ogg)
+- [Line removal](./sounds/explosion.wav)
+- [Shape placed](./sounds/shapePlace.wav)
+- [Game background](https://freesound.org/people/BloodPixelHero/sounds/580898/)
 
 ### 📚 References
 
-- [Pokemon Rulebook](http://assets.pokemon.com/assets/cms2/pdf/trading-card-game/rulebook/xy8-rulebook-en.pdf)
+- [Tetris game](https://tetris.com/play-tetris)
+- [Itch.io - Tetris](https://fab08.itch.io/tetris)
+- [Tetris Wiki](https://en.wikipedia.org/wiki/Tetris)
 
 
 
