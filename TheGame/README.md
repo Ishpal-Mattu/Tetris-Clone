@@ -93,20 +93,20 @@ The GUI will be kept easy to use. There will be an option to learn how to play i
 
 These are mostly the images that will be used:
 
-**Blocks:**
+**Blocks:**   
 ![black](./images/blockBlack.png) ![Blue](./images/blockBlue.png)
 ![Green](./images/blockGreen.png) ![Lightblue](./images/blockLightblue.png)
 ![Orange](./images/blockOrange.png) ![Purple](./images/blockPurple.png)
 ![Red](./images/blockRed.png) ![Yellow](./images/blockYellow.png)
 
-**Game Frame**
+**Game Frame**    
 ![Frame](./images/GameFrame.png)
 
-**Backgrounds**
+**Backgrounds**    
 ![GridBackground](./images/Dark-grid-background.png)
 ![SkyBackground](./images/SkyBackground.jpg)
 
-**Title Image**
+**Title Image**    
 ![TetrisTitle](./images/title.png)
 
 More images might be used during the implentation.
