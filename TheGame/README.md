@@ -128,10 +128,11 @@ All of the above images are from the following sources
 
 #### ✏️ Fonts
 
-For fonts, a retro gaming type font will be used. A more bold and darker font like might also be used
+For fonts, a retro gaming type font will be used for most of the text. A more bold and darker font might also be used for some parts. The Minecraft Evenings font might also be used since it give block like feeling.
 
 - [Joystix](./fonts/Joystix.ttf)
 - [Tank](./fonts/tank.ttf)
+- [Minecraft Evenings](./fonts/Minecraft Evenings.otf)
 
 #### 🔊 Sounds
 
