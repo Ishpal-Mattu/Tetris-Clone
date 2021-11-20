@@ -2,9 +2,9 @@
 
 ## ✒️ Description
 
-In this puzzle game, there will be shapes falling from the top of the world. The shapes are formed using multiple small square blocks and the shapes are of different forms. The player has to strategically place those falling shapes on the ground in the goal to make a connecting line of small square blocks. Once a line is formed, that line gets removed and the blocks on top of that line falls down. Points are awarded for each line formed. Once a certain amount of points are reached, the level is increased. Higher the level, faster the shapes will fall giving less time for the player to think and act. Once the placed shapes build a tower exceeding top of the world (line where shapes start to fall), the game ends and the score is shown to the player. If the score is among the top five highscores, the player is asked for his nickname and his score gets placed in the highscore leaderboard. 
+In this puzzle game, there will be shapes falling from the top of the world. The shapes are formed using multiple small square blocks and the shapes are of different forms. The player has to strategically place those falling shapes on the ground in the goal to make a connecting line of small square blocks. Once a line is formed, that line gets removed and the blocks on top of that line falls down. Points are awarded for each line formed. Once a certain amount of points are reached, the level is increased. Higher the level, faster the shapes will fall giving less time for the player to think and act. While the shape is falling, the player will be able to move it left and right, and make it fall faster. The player will also have the option to instantly make the shape fall to the ground, and to help them visualize where exactly the shape will end up on instant fall, there is a "ghost" preview showing exactly that. Another possibility for the player is to place the falling shape in "hold" and retrieve it at a later moment. Once the placed shapes build a tower exceeding top of the world (line where shapes start to fall), the game ends and the score is shown to the player. If the score is among the top five highscores, the player is asked for his nickname and his score gets placed in the highscore leaderboard. 
 
-Also, the player's cuurent score & current level is always displayed somewhere outside the playing area (either at the **top right** or **top left**). Another information displayed outside the playing area is the next shape that will fall. 
+Also, the player's curent score & current level is always displayed somewhere outside the playing area (either at the **top right** or **top left**). Another information displayed outside the playing area is the next shape that will fall. 
 
 ## 🕹️ Gameplay
 
@@ -13,10 +13,19 @@ Game begins by 1 shape falling from the sky. As the shape is falling, the player
 2. Move the falling shape one block to the right using the `right arrow key`.
 3. Rotate the falling shape using the `up arrow key`.
 4. Make the shape fall faster using the `down arrow key`.
+5. Make the shape instantly fall using the `space bar`.
+6. Put the falling shape in the "holding" area using the `C key`.
+
+The holding of a shape works in the following way:
+1. The player clicks `C` when a shape is falling and there is nothing in the holding area.
+2. That falling shape will be placed in the holding area and a new shape will start falling.
+3. The player clicks `C` again when a shape is falling and a shape is already placed in the holding area.
+4. The falling shape will be placed in the holding area and the shape already placed in the holding area will be removed from that area and start falling from the top.
 
 There are two ways the player can gain points:
-1. The main way is to form a line of blocks by placing the shapes strategically.
-2. A second way is to make the falling shapes fall faster by clicking the down arrow key. Since this is just a way to increase the level faster if the player finds the first few levels too easy, the points awarded by this function are low. Awarding points by this method would be something along the lines of every **X** seconds the player **holds** the **down** arrow key, he gains **1 point**.
+1. The main way is to form a horizontal line of blocks by placing the shapes strategically.
+2. A second way is to make the falling shapes fall faster by clicking the down arrow key. Since this is just a way to increase the level faster if the player finds the first few levels too easy, the points awarded by this function are low. Awarding points by this method would be something along the lines of every **1** block of distance covered while pressing **Down**, the player earns **X** amount of points.
+3. A third way is to make the falling shape instantly fall by clicking the space bar. Points awarded by this method will also be low and will be similar to the 2nd method. Awarding points by this method would be something along the lines of every **1** block of distance skiped will give the player **X * 2** amount of points. X being the number of points per block from method 2.
 
 Once the falling shape touches a already placed block, that falling shape stops falling and gets placed at that position. Once a shape is placed, another one starts falling from the sky and so on until the player reaches a high enough level that he cannot handle the speed at which the blocks are falling and is unable to place the falling blocks well making them pile up to the sky. Once the blocks do pile up to the sky, the game is over.
 
@@ -47,14 +56,16 @@ Throughout the game, the player can click `M` on their keyboard at any time to m
 21. The game shall have a title screen with three options: 1 that leads to the actual game, 1 that leads to the game instructions and 1 that leads to the highscore board.
 22. The game shall have a game over screen with the high score board displayed.
 23. On game over, if the player manages to hit a highscore, the system shall ask him his nickname to display his score on the highscore board.
+24. The player shall make the shape instantly fall to the ground.
+25. The system shall award the player some points for making the shape instantly fall.
+26. The player shall hold a falling shape and retrieve it later.
+27. The system shall only allow one shape at a time in the holding area.
+28. The system shall show a ghost preview of where the shape will land on instant fall.
 
 ### 🤖 State Diagram
 
 #### 🎮 Game State
 ![Game State Diagram](./images/GameStateDiagram.jpg)
-
-#### 🧱 Shape State
-![Shape State Diagram](./images/ShapeState.png)
 
 ### 🗺️ Class Diagram
 ![Class Diagram](./images/ClassDiagram.png)
