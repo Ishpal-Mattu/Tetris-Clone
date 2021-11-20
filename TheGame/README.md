@@ -132,7 +132,7 @@ For fonts, a retro gaming type font will be used for most of the text. A more bo
 
 - [Joystix](./fonts/Joystix.ttf)
 - [Tank](./fonts/tank.ttf)
-- [Minecraft Evenings](./fonts/Minecraft Evenings.otf)
+- [Minecraft Evenings](./fonts/Minecraft%20Evenings.otf)
 
 #### 🔊 Sounds
 
