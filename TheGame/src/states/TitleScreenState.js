@@ -1,4 +1,5 @@
 import State from "../../lib/State.js";
+import ColorScheme from "../enums/ColorScheme.js";
 import GameStateName from "../enums/GameStateName.js";
 import ImageName from "../enums/ImageName.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, sounds, stateMachine } from "../globals.js";
@@ -69,12 +70,12 @@ export default class TitleScreenState extends State {
 
 		// Array for each letter's color
 		const TITLE_FILL = [
-			"#f24765", 		// Red
-			"#f68d16",		// Orange
-			"#fccb22",		// Yellow
-			"#53ce3a",		// Green
-			"#55ecfa",		// Blue
-			"#da2ad7", 		// Purple
+			ColorScheme.Red, 		// Red
+			ColorScheme.Orange,		// Orange
+			ColorScheme.Yellow,		// Yellow
+			ColorScheme.Green,		// Green
+			ColorScheme.Blue,		// Blue
+			ColorScheme.Purple, 	// Purple
 		]
 		
 		const TITLE_STRING = "TETRIS";

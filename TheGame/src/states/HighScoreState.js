@@ -1,4 +1,5 @@
 import State from "../../lib/State.js"
+import ColorScheme from "../enums/ColorScheme.js";
 import GameStateName from "../enums/GameStateName.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, sounds, stateMachine } from "../globals.js";
 import HighScoreManager from "../services/HighScoreManager.js";
@@ -33,13 +34,13 @@ export default class HighScoreState extends State{
 		context.globalAlpha = 1;
 
 		context.save();
-		context.fillStyle = "white";
+		context.fillStyle = ColorScheme.Purple;
 		context.font = "48px MinecraftEvenings";
 		context.textAlign = 'center';
 		context.fillText(`🎉 HIGH SCORES 🎉`, CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.15);
 
 
-
+        context.fillStyle = ColorScheme.White;
         context.font = "30px MinecraftEvenings";
 		for (let i = 0; i < HighScoreManager.MAX_HIGH_SCORES; i++) {
 			const name = this.highScores[i].name ?? '---';

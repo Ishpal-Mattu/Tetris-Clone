@@ -10,7 +10,12 @@
  * Images:
  * - Title-tile: <a href="https://www.vecteezy.com/free-vector/ornament">Ornament Vectors by Vecteezy</a>
  * - Gameover Text: <a href="https://www.vecteezy.com/free-vector/green">Green Vectors by Vecteezy</a>
+ * 
+ * Fonts:
+ * - Tetris font : https://fontsgeek.com/fonts/NEW-TETRIS-Regular
  */
+
+
 
 import GameStateName from "./enums/GameStateName.js";
 import Game from "../lib/Game.js";
@@ -28,6 +33,7 @@ import GameOverState from "./states/GameOverState.js";
 import VictoryState from "./states/VictoryState.js";
 import TitleScreenState from "./states/TitleScreenState.js";
 import HighScoreState from "./states/HighScoreState.js";
+import InstructionsState from "./states/InstructionsState.js";
 
 // Fetch the asset definitions from config.json.
 const {
@@ -45,11 +51,12 @@ sounds.load(soundDefinitions);
 // Add all the states to the state machine.
 stateMachine.add(GameStateName.TitleScreen, new TitleScreenState());
 stateMachine.add(GameStateName.Highscore, new HighScoreState());
+stateMachine.add(GameStateName.Instructions, new InstructionsState());
 stateMachine.add(GameStateName.GameOver, new GameOverState());
 stateMachine.add(GameStateName.Victory, new VictoryState());
 stateMachine.add(GameStateName.Play, new PlayState());
 
-stateMachine.change(GameStateName.TitleScreen);
+stateMachine.change(GameStateName.Instructions);
 
 // Add event listeners for player input.
 canvas.addEventListener('keydown', event => {
