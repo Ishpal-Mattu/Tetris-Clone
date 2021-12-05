@@ -65,32 +65,32 @@ Throughout the game, the player can click `M` on their keyboard at any time to m
 ### 🤖 State Diagram
 
 #### 🎮 Game State
-![Game State Diagram](./images/GameStateDiagram.jpg)
+![Game State Diagram](./assets/images/GameStateDiagram.jpg)
 
 ### 🗺️ Class Diagram
-![Class Diagram](./images/ClassDiagram.png)
+![Class Diagram](./assets/images/ClassDiagram.png)
 
 ### 🧵 Wireframes
 #### Main Menu
-![MainMenu](./images/MenuScreen.jpg)
+![MainMenu](./assets/images/MenuScreen.jpg)
 - _Start_ will navigate to the main game
 - _High Score_ will navigate to the high score screen
 - _How to play_ will navigate to the how-to-play screen
 
 #### High Score Screen
-![HighScore](./images/HighScoreScreen.jpg)
+![HighScore](./assets/images/HighScoreScreen.jpg)
 
 #### How To Play Screen
-![Instructions](./images/InstructionsScreen.jpg)
+![Instructions](./assets/images/InstructionsScreen.jpg)
 
 #### Main Game
-![PlayState](./images/Playstate.jpg)
+![PlayState](./assets/images/Playstate.jpg)
 
 #### High Score Enter
-![High Score Enter](./images/HighScoreEnter.jpg)
+![High Score Enter](./assets/images/HighScoreEnter.jpg)
 
 #### Game Over Screen
-![Game Over](./images/GameOver.jpg)
+![Game Over](./assets/images/GameOver.jpg)
 
 ### 🎨 Assets
 
