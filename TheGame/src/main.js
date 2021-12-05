@@ -6,6 +6,10 @@
  * Brief description
  *
  * Asset sources
+ * 
+ * Images:
+ * - Title-tile: <a href="https://www.vecteezy.com/free-vector/ornament">Ornament Vectors by Vecteezy</a>
+ * - Gameover Text: <a href="https://www.vecteezy.com/free-vector/green">Green Vectors by Vecteezy</a>
  */
 
 import GameStateName from "./enums/GameStateName.js";
@@ -23,6 +27,7 @@ import PlayState from "./states/PlayState.js";
 import GameOverState from "./states/GameOverState.js";
 import VictoryState from "./states/VictoryState.js";
 import TitleScreenState from "./states/TitleScreenState.js";
+import HighScoreState from "./states/HighScoreState.js";
 
 // Fetch the asset definitions from config.json.
 const {
@@ -39,6 +44,7 @@ sounds.load(soundDefinitions);
 
 // Add all the states to the state machine.
 stateMachine.add(GameStateName.TitleScreen, new TitleScreenState());
+stateMachine.add(GameStateName.Highscore, new HighScoreState());
 stateMachine.add(GameStateName.GameOver, new GameOverState());
 stateMachine.add(GameStateName.Victory, new VictoryState());
 stateMachine.add(GameStateName.Play, new PlayState());

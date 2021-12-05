@@ -1,11 +1,114 @@
 {
 	"images": [
-
+		{
+			"name": "title",
+			"path": "./assets/images/title.png",
+			"width": 489,
+			"height": 168
+		},
+		{
+			"name": "background",
+			"path": "./assets/images/SkyBackground.jpg",
+			"width": 512,
+			"height": 512
+		},
+		{
+			"name": "gameFrame",
+			"path": "./assets/images/GameFrame.png",
+			"width": 801,
+			"height": 800
+		},
+		{
+			"name": "blackBlock",
+			"path": "./assets/images/blockBlack.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "blueBlock",
+			"path": "./assets/images/blockBlue.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "greenBlock",
+			"path": "./assets/images/blockGreen.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "lightBlueBlock",
+			"path": "./assets/images/blockLightblue.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "orangeBlock",
+			"path": "./assets/images/blockOrange.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "purpleBlock",
+			"path": "./assets/images/blockPurple.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "redBlock",
+			"path": "./assets/images/blockRed.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "yellowBlock",
+			"path": "./assets/images/blockYellow.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "blockBackground",
+			"path": "./assets/images/title-background.jpg",
+			"width": 1920,
+			"height": 1920
+		}
 	],
 	"fonts": [
-
+		{
+			"name": "Joystix",
+			"path": "./assets/fonts/Joystix.ttf"
+		},
+		{
+			"name": "MinecraftEvenings",
+			"path": "./assets/fonts/MinecraftEvenings.otf"
+		},
+		{
+			"name": "tank",
+			"path": "./assets/fonts/tank.ttf"
+		},
+		{
+			"name": "NewTetrisRegular",
+			"path": "./assets/fonts/NewTetrisRegular.ttf"
+		}
 	],
 	"sounds": [
-		
+		{
+			"name": "explosion",
+			"path": "./assets/sounds/explosion.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "menu",
+			"path": "./assets/sounds/menu.ogg",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "shapePlace",
+			"path": "./assets/sounds/shapePlace.wav",
+			"size": 5,
+			"volume": 0.1
+		}
 	]
 }
