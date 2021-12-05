@@ -105,20 +105,20 @@ The GUI will be kept easy to use. There will be an option to learn how to play i
 These are mostly the images that will be used:
 
 **Blocks:**   
-![black](./images/blockBlack.png) ![Blue](./images/blockBlue.png)
-![Green](./images/blockGreen.png) ![Lightblue](./images/blockLightblue.png)
-![Orange](./images/blockOrange.png) ![Purple](./images/blockPurple.png)
-![Red](./images/blockRed.png) ![Yellow](./images/blockYellow.png)
+![black](./assets/images/blockBlack.png) ![Blue](./assets/images/blockBlue.png)
+![Green](./assets/images/blockGreen.png) ![Lightblue](./assets/images/blockLightblue.png)
+![Orange](./assets/images/blockOrange.png) ![Purple](./assets/images/blockPurple.png)
+![Red](./assets/images/blockRed.png) ![Yellow](./images/assets/blockYellow.png)
 
 **Game Frame**    
-![Frame](./images/GameFrame.png)
+![Frame](./assets/images/GameFrame.png)
 
 **Backgrounds**    
-![GridBackground](./images/Dark-grid-background.png)
-![SkyBackground](./images/SkyBackground.jpg)
+![GridBackground](./assets/images/Dark-grid-background.png)
+![SkyBackground](./assets/images/SkyBackground.jpg)
 
 **Title Image**    
-![TetrisTitle](./images/title.png)
+![TetrisTitle](./assets/images/title.png)
 
 More images might be used during the implentation.
 
@@ -130,18 +130,18 @@ All of the above images are from the following sources
 
 For fonts, a retro gaming type font will be used for most of the text. A more bold and darker font might also be used for some parts. The Minecraft Evenings font might also be used since it give block like feeling.
 
-- [Joystix](./fonts/Joystix.ttf)
-- [Tank](./fonts/tank.ttf)
-- [Minecraft Evenings](./fonts/Minecraft%20Evenings.otf)
+- [Joystix](./assets/fonts/Joystix.ttf)
+- [Tank](./assets/fonts/tank.ttf)
+- [Minecraft Evenings](./assets/fonts/Minecraft%20Evenings.otf)
 
 #### 🔊 Sounds
 
 Menu, Line removal and Shape placed sounds were taken from [https://fab08.itch.io/tetris](https://fab08.itch.io/tetris).
 Game background music was taking from [freesound.org](https://freesound.org/people/BloodPixelHero/sounds/580898/)
 
-- [Menu background](./sounds/menu.ogg)
-- [Line removal](./sounds/explosion.wav)
-- [Shape placed](./sounds/shapePlace.wav)
+- [Menu background](./assets/sounds/menu.ogg)
+- [Line removal](./assets/sounds/explosion.wav)
+- [Shape placed](./assets/sounds/shapePlace.wav)
 - [Game background](https://freesound.org/people/BloodPixelHero/sounds/580898/)
 
 ### 📚 References
