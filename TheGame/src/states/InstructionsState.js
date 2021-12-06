@@ -54,10 +54,8 @@ export default class InstructionsState extends State {
         context.font = "20px Tank";
         context.fillStyle = ColorScheme.White;
 
-        // Move Text
 
-
-
+        // Writing paragraph under each header
         let paragraphText = [
             "Use left and right arrow keys to move falling blocks. The a/d keys can also be used",
             "Use up arrow key to rotate the falling blocks. The w key can also be used",
@@ -77,7 +75,8 @@ export default class InstructionsState extends State {
 
             textXFraction += 0.25;
         }
-        
+
+        // Instruction for navigation to title/menu screen
         context.fillStyle = ColorScheme.White;
 		context.font = "20px Joystix";
 		context.textBaseline = 'middle';
