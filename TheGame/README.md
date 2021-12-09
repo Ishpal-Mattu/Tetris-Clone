@@ -108,7 +108,7 @@ These are mostly the images that will be used:
 ![black](./assets/images/blockBlack.png) ![Blue](./assets/images/blockBlue.png)
 ![Green](./assets/images/blockGreen.png) ![Lightblue](./assets/images/blockLightblue.png)
 ![Orange](./assets/images/blockOrange.png) ![Purple](./assets/images/blockPurple.png)
-![Red](./assets/images/blockRed.png) ![Yellow](./images/assets/blockYellow.png)
+![Red](./assets/images/blockRed.png) ![Yellow](.//assets/images/blockYellow.png)
 
 **Game Frame**    
 ![Frame](./assets/images/GameFrame.png)
