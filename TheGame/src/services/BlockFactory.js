@@ -30,7 +30,7 @@ export default class BlockFactory {
                 return new Block(new Vector(Block.WIDTH, Block.HEIGHT), new Vector(xInBoard, yInBoard), this.BLOCK_IMAGE.Red, isGhostBlock);
             case BlockColor.Yellow:
                 return new Block(new Vector(Block.WIDTH, Block.HEIGHT), new Vector(xInBoard, yInBoard), this.BLOCK_IMAGE.Yellow, isGhostBlock);
-            case BlockColor.Lightblue:
+            case BlockColor.LightBlue:
                 return new Block(new Vector(Block.WIDTH, Block.HEIGHT), new Vector(xInBoard, yInBoard), this.BLOCK_IMAGE.Lightblue, isGhostBlock);
             case BlockColor.Purple:
                 return new Block(new Vector(Block.WIDTH, Block.HEIGHT), new Vector(xInBoard, yInBoard), this.BLOCK_IMAGE.Purple, isGhostBlock);

@@ -3,11 +3,10 @@ import BlockColor from "../enums/BlockColor.js";
 import ShapeType from "../enums/ShapeType.js";
 import BlockFactory from "../services/BlockFactory.js";
 import Shape from "./Shape.js";
-import Square from "./Square.js";
 
-export default class LShape extends Shape{
+export default class JShape extends Shape{
 
-    static COLOR = BlockColor.Orange;
+    static COLOR = BlockColor.Blue;
     static WIDTH = 3;
     static HEIGHT = 3;
      /**
@@ -15,19 +14,19 @@ export default class LShape extends Shape{
      * @param {Boolean} isGhost 
      */
     constructor(isGhost){
-        super(new Vector(LShape.WIDTH, LShape.HEIGHT), isGhost)
+        super(new Vector(JShape.WIDTH, JShape.HEIGHT), isGhost)
 
         this.tetromino = this.initializeTetrimono();
-        this.type = ShapeType.l;
+        this.type = ShapeType.j
     }
 
     initializeTetrimono(){
-        const tetromino = [{}, 0, 0, {}, 0, 0, {}, {}, 0];
+        const tetromino = [0, 0, {}, 0, 0, {}, 0, {}, {}];
 
         for(let i = 0; i < tetromino.length; i++){
             if(typeof tetromino[i] !== "number"){
                 
-                tetromino[i] = BlockFactory.createInstance(this.position.x, this.position.y, this.isGhost, LShape.COLOR);
+                tetromino[i] = BlockFactory.createInstance(this.position.x, this.position.y, this.isGhost, JShape.COLOR);
             }
         }
 
@@ -40,7 +39,7 @@ export default class LShape extends Shape{
      clone(){
         const superClone = super.clone();
 
-        const clonedShape = new LShape(this.isGhost);
+        const clonedShape = new JShape(this.isGhost);
         Object.assign(clonedShape, superClone);        
 
         return clonedShape;

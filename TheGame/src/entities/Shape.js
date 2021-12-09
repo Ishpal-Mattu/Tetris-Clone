@@ -4,6 +4,7 @@ import Direction from "../enums/Direction.js";
 import GameBoard from "../objects/GameBoard.js";
 import Block from "../objects/Block.js";
 import { GAME_BOARD_X, GAME_BOARD_Y } from "../globals.js";
+import ShapeType from "../enums/ShapeType.js";
 
 export default class Shape extends GameEntity{
     
@@ -11,15 +12,16 @@ export default class Shape extends GameEntity{
     /**
      * Represents a shape composed of 1 or more Block.
      * This abstract class should not be instantiated directly.
-     * @param {Number} size the width and height of the shape represented by the number of Block.
+     * @param {Vector} dimensions the width and height of the shape represented by the number of Block.
      * @param {Boolean} isGhost 
      */
-    constructor(size, isGhost){
-        super(new Vector(size, size), new Vector(0, 0));
+    constructor(dimensions, isGhost){
+        super(dimensions, new Vector(0, 0));
 
         this.isGhost = isGhost;
-        this.direction = Direction.Up;
+        //this.direction = Direction.Up;
         this.tetromino = [];
+        this.type = null;
     }
 
     rotate(){
@@ -45,26 +47,23 @@ export default class Shape extends GameEntity{
 
     /**
      * 
-     * @param {GameBoard} gameboard 
      */
-    moveRight(gameboard){
-
+    moveRight(){
+        this.position.x++;
     }
 
     /**
      * 
-     * @param {GameBoard} gameboard 
      */
-    moveLeft(gameboard){
-
+    moveLeft(){
+        this.position.x--;
     }
 
     /**
      * 
-     * @param {GameBoard} gameboard 
      */
-    drop(gameboard){
-
+    drop(){
+        this.position.y++;
     }
 
     /**
@@ -112,6 +111,18 @@ export default class Shape extends GameEntity{
         }
     }
 
+    /**
+     * 
+     */
+    clone(){
+        const clonedShape = new Shape(new Vector(this.dimensions.x, this.dimensions.y), this.isGhost);
+        clonedShape.currentFrame = this.currentFrame;
+        clonedShape.dimensions = new Vector(this.dimensions.x, this.dimensions.y);
+        clonedShape.position = new Vector(this.position.x, this.position.y);
+        clonedShape.sprites = [...this.sprites];
+        clonedShape.tetromino = [...this.tetromino];
+        clonedShape.type = this.type;
 
-
+        return clonedShape;
+    }
 }

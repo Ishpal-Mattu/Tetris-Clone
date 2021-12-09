@@ -1,6 +1,11 @@
 import { getRandomPositiveInteger, getRandomPositiveNumber } from "../../lib/RandomNumberHelpers.js";
+import IShape from "../entities/IShape.js";
+import JShape from "../entities/JShape.js";
 import LShape from "../entities/LShape.js";
 import Square from "../entities/Square.js";
+import SShape from "../entities/SShape.js";
+import TShape from "../entities/TShape.js";
+import ZShape from "../entities/ZShape.js";
 import ShapeType from "../enums/ShapeType.js";
 
 export default class ShapeFactory{
@@ -16,8 +21,14 @@ export default class ShapeFactory{
             shapeType = this.getRandomShape();
 
         switch(shapeType){
+            
+            case ShapeType.i: return new IShape(isGhost);
+            case ShapeType.j: return new JShape(isGhost);
             case ShapeType.l: return new LShape(isGhost);
-            default: return new Square(isGhost);
+            case ShapeType.o: return new Square(isGhost);
+            case ShapeType.s: return new SShape(isGhost);
+            case ShapeType.t: return new TShape(isGhost);
+            default: return new ZShape(isGhost);
         }
     }
 

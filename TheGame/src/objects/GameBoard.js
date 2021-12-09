@@ -1,6 +1,6 @@
 import Shape from "../entities/Shape.js";
 import ShapeType from "../enums/ShapeType.js";
-import { BLOCK_SIZE, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y } from "../globals.js";
+import { BLOCK_SIZE, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y, keys } from "../globals.js";
 import ShapeFactory from "../services/ShapeFactory.js";
 import Block from "./Block.js";
 
@@ -23,8 +23,9 @@ export default class GameBoard {
         
         this.grid = this.getEmptyBoard();
 
-        this.shape = ShapeFactory.createInstance(ShapeType.l);
-        this.shape.position.x = GAME_BOARD_WIDTH/2;
+        this.currentShape = ShapeFactory.createInstance();
+
+        this.currentShape.position.x = GAME_BOARD_WIDTH/2;
         //(x,y) => { list[4*y + x] }
     }
 
@@ -39,7 +40,62 @@ export default class GameBoard {
     }
 
     update(dt){
-        this.shape.update();
+
+        this.handleMovement();
+
+        this.currentShape.update();
+    }
+
+    handleMovement() {
+
+        const testShape = this.currentShape.clone();
+        let didMove = false;
+        if(keys.ArrowUp){
+			testShape.rotate();
+            keys.ArrowUp = false;
+            didMove = true;
+		}
+		else if(keys.ArrowLeft){
+            testShape.moveLeft()
+            keys.ArrowLeft = false;
+            didMove = true;
+		}
+		else if(keys.ArrowRight){
+            testShape.moveRight();
+            keys.ArrowRight = false;
+            didMove = true;
+		}
+		else if(keys.ArrowDown){
+            testShape.drop();
+            keys.ArrowDown = false;
+            didMove = true;
+		}
+
+        if(didMove && this.validPosition(testShape)){
+            this.currentShape = testShape;
+        }
+        
+    }
+
+    /**
+     * 
+     * @param {Shape} shape 
+     */
+    validPosition(shape) {
+        for(let x = 0; x < shape.dimensions.x; x++){
+            for(let y = 0; y < shape.dimensions.y; y++){
+                try {
+                    if(shape.blockAt(x, y) instanceof Block && this.grid[shape.position.y + y][shape.position.x + x] !== 0){
+                        return false;
+                    }
+                } catch (error) {
+                    return false;
+                }
+                
+            }
+        }
+
+        return true;
     }
 
     render(){
@@ -47,7 +103,7 @@ export default class GameBoard {
         let y = GameBoard.YPOS;
 
         // Render the shape (the shape renders each block)
-        this.renderShape(this.shape);
+        this.currentShape.render();
 
         context.save();
         context.strokeStyle = "black";

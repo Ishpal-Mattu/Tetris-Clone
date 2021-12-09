@@ -35,14 +35,17 @@ export default class Game {
 		// Calculates delta time and converts it to seconds instead of milliseconds.
 		const deltaTime = (currentTime - this.lastTime) / 1000;
 
-		if(Game.updateDelay && deltaTime >= 2){
-			this.update(deltaTime);
-			this.lastTime = currentTime;
-		}
-		else if(!Game.updateDelay){
-			this.update(deltaTime);
-			this.lastTime = currentTime;
-		}
+		// if(Game.updateDelay && deltaTime >= 2){
+		// 	this.update(deltaTime);
+		// 	this.lastTime = currentTime;
+		// }
+		// else if(!Game.updateDelay){
+		// 	this.update(deltaTime);
+		// 	this.lastTime = currentTime;
+		// }
+
+		this.update(deltaTime);
+		this.lastTime = currentTime;
 		
 		
 		requestAnimationFrame((time) => {this.gameLoop(time)});

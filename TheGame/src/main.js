@@ -63,9 +63,9 @@ canvas.addEventListener('keydown', event => {
 	keys[event.key] = true;
 });
 
-canvas.addEventListener('keyup', event => {
-	keys[event.key] = false;
-});
+// canvas.addEventListener('keyup', event => {
+// 	keys[event.key] = false;
+// });
 
 const game = new Game(stateMachine, context, canvas.width, canvas.height);
 
