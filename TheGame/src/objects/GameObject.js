@@ -1,5 +1,5 @@
-import { getCollisionDirection, isAABBCollision } from "../../lib/CollisionHelpers";
-import Vector from "../../lib/Vector";
+import { getCollisionDirection, isAABBCollision } from "../../lib/CollisionHelpers.js";
+import Vector from "../../lib/Vector.js";
 
 export default class GameObject {
 

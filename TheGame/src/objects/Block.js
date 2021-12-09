@@ -2,13 +2,13 @@ import Sprite from "../../lib/Sprite.js";
 import Vector from "../../lib/Vector.js";
 import Direction from "../enums/Direction.js";
 import ImageName from "../enums/ImageName.js";
-import { context, images, TILE_SIZE } from "../globals.js";
+import { context, images, BLOCK_SIZE } from "../globals.js";
 import GameObject from "./GameObject.js";
 
 export default class Block extends GameObject{
     
-    static WIDTH = TILE_SIZE;
-    static HEIGHT = TILE_SIZE;
+    static WIDTH = BLOCK_SIZE;
+    static HEIGHT = BLOCK_SIZE;
 
     /**
      * The individual blocks that make up a shape.
@@ -44,6 +44,11 @@ export default class Block extends GameObject{
             super.onCollision(collider);
             this.isPlaced = true;
         }
+    }
+
+    update(){
+        this.position.x = this.boardX * this.dimensions.x;
+        this.position.y = this.boardY * this.dimensions.y;
     }
 
     render(x, y){

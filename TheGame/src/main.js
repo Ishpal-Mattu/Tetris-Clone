@@ -56,7 +56,7 @@ stateMachine.add(GameStateName.GameOver, new GameOverState());
 stateMachine.add(GameStateName.Victory, new VictoryState());
 stateMachine.add(GameStateName.Play, new PlayState());
 
-stateMachine.change(GameStateName.Instructions);
+stateMachine.change(GameStateName.Play);
 
 // Add event listeners for player input.
 canvas.addEventListener('keydown', event => {

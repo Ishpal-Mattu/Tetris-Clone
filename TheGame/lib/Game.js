@@ -1,6 +1,7 @@
 import StateMachine from "./StateMachine.js";
 
 export default class Game {
+	static updateDelay = false;
 	/**
 	 * Contains our game loop logic so that `main.js` stays clean.
 	 *
@@ -34,9 +35,17 @@ export default class Game {
 		// Calculates delta time and converts it to seconds instead of milliseconds.
 		const deltaTime = (currentTime - this.lastTime) / 1000;
 
-		this.update(deltaTime);
-		this.lastTime = currentTime;
-		requestAnimationFrame((time) => this.gameLoop(time));
+		if(Game.updateDelay && deltaTime >= 2){
+			this.update(deltaTime);
+			this.lastTime = currentTime;
+		}
+		else if(!Game.updateDelay){
+			this.update(deltaTime);
+			this.lastTime = currentTime;
+		}
+		
+		
+		requestAnimationFrame((time) => {this.gameLoop(time)});
 	}
 
 	/**
