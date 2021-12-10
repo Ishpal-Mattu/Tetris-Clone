@@ -8,7 +8,7 @@ import ShapeType from "../enums/ShapeType.js";
 
 export default class Shape extends GameEntity{
     
-    static SIZE = 4;
+    
     /**
      * Represents a shape composed of 1 or more Block.
      * This abstract class should not be instantiated directly.
@@ -22,6 +22,16 @@ export default class Shape extends GameEntity{
         //this.direction = Direction.Up;
         this.tetromino = [];
         this.type = null;
+        this.isPlaced = false;
+        this.cleanUp = false;
+    }
+
+    onPlace(){
+        this.isPlaced = true;
+    }
+
+    onCleanup(){
+        this.cleanUp = true;
     }
 
     rotate(){

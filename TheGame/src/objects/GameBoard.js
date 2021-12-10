@@ -10,6 +10,8 @@ export default class GameBoard {
     static ROWS = GAME_BOARD_HEIGHT;
     static XPOS = GAME_BOARD_X;
     static YPOS = GAME_BOARD_Y;
+    static EMPTY_SPACE = 0;
+    static BLOCK_SPACE = 1;
 
     /**
      * 
@@ -24,8 +26,18 @@ export default class GameBoard {
         this.grid = this.getEmptyBoard();
 
         this.currentShape = ShapeFactory.createInstance();
+        this.nextShape = null;
+        
+        /**
+         * @type {Shape[]}
+         */
+        this.placedShapes = [];
 
-        this.currentShape.position.x = GAME_BOARD_WIDTH/2;
+        this.currentShape.position.x = GAME_BOARD_WIDTH/2 - 1;
+        this.currentShape.position.y = 0;
+        this.deltaTime = 0;
+        this.dropTime = 2;
+        this.collisionTime = 0;
         //(x,y) => { list[4*y + x] }
     }
 
@@ -35,15 +47,85 @@ export default class GameBoard {
      */
     getEmptyBoard(){
         return Array.from(
-            {length: this.height}, () => Array(this.width).fill(0)
+            {length: this.height}, () => Array(this.width).fill(GameBoard.EMPTY_SPACE)
         );
     }
 
     update(dt){
 
-        this.handleMovement();
+        this.deltaTime += dt;
+		if(this.deltaTime >= this.dropTime){
+			this.deltaTime = 0;
+			this.dropCurrentShape();
+            if(this.collisionTime >= 2){
+                this.placeCurrentShape();
+                this.createCurrentShape();
+            }
+		}
 
+        this.handleMovement();
         this.currentShape.update();
+
+
+    }
+
+    placeCurrentShape(){
+        this.currentShape.onPlace();
+        this.collisionTime = 0;
+        this.placedShapes.push(this.currentShape);
+        
+        for(let x = 0; x < this.currentShape.dimensions.x; x++){
+            for(let y = 0; y < this.currentShape.dimensions.y; y++){
+                if(this.currentShape.blockAt(x,y) instanceof Block){
+                    const boardX = this.currentShape.position.x + x;
+                    const boardY = this.currentShape.position.y + y;
+
+                    this.grid[boardY][boardX] = GameBoard.BLOCK_SPACE;
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param {Number} startRow 
+     * @param {Number} endRow 
+     */
+    checkRowMatch(startRow, endRow){
+        for(let i = endRow; i > startRow; i--){
+            if(this.grid[i].every(block => block === GameBoard.BLOCK_SPACE)){
+
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param {Number} boardRow 
+     */
+    removeRow(boardRow){
+        this.grid[boardRow].fill(GameBoard.EMPTY_SPACE);
+        
+    }
+
+    createCurrentShape(){
+        this.currentShape = ShapeFactory.createInstance();
+        this.currentShape.position.x = GAME_BOARD_WIDTH/2 - 1;
+        this.currentShape.position.y = 0;
+    }
+
+
+
+    dropCurrentShape(){
+        const testShape = this.currentShape.clone();
+        testShape.drop();
+
+        if(this.validPosition(testShape)){
+            this.currentShape = testShape;
+        }
+        else{
+            this.collisionTime++;
+        }
     }
 
     handleMovement() {
@@ -85,9 +167,10 @@ export default class GameBoard {
         for(let x = 0; x < shape.dimensions.x; x++){
             for(let y = 0; y < shape.dimensions.y; y++){
                 try {
-                    if(shape.blockAt(x, y) instanceof Block && this.grid[shape.position.y + y][shape.position.x + x] !== 0){
+                    if(shape.blockAt(x, y) instanceof Block && this.grid[shape.position.y + y][shape.position.x + x] != 0 ){
                         return false;
                     }
+                    
                 } catch (error) {
                     return false;
                 }
@@ -98,12 +181,31 @@ export default class GameBoard {
         return true;
     }
 
+    // /**
+    //  * Determines if there is a placed shape in the given game board position
+    //  * @param {Number} boardY
+    //  * @param {Number} boardX
+    //  */
+    // isOverlappingOtherShapes(boardY, boardX){
+    //     this.placedShapes.forEach(shape => {
+    //         for(let x = 0; x < shape.dimensions.x; x++){
+    //             for(let y = 0; y < shape.dimensions.y ; y++){
+    //                 if(shape.blockAt(x,y) instanceof Block && (shape.position.y + y === boardY && shape.position.x + x === boardX)){
+    //                     return true;
+    //                 }
+    //             }
+    //         }
+    //     })
+
+    //     return false;
+    // }
+
     render(){
         let x = GameBoard.XPOS;
         let y = GameBoard.YPOS;
 
-        // Render the shape (the shape renders each block)
-        this.currentShape.render();
+        // Renders all shapes in the game area (current shape & placed shapes) (the shape renders each block)
+        this.renderAllShape();
 
         context.save();
         context.strokeStyle = "black";
@@ -128,5 +230,15 @@ export default class GameBoard {
      */
     renderShape(shape){
         shape.render();
+    }
+
+    /**
+     * Renders all shapes in the game area.
+     */
+    renderAllShape(){
+        this.currentShape.render();
+        this.placedShapes.forEach( shape => {
+            shape.render();
+        })
     }
 }
