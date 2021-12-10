@@ -81,6 +81,10 @@ export default class Shape extends GameEntity{
         this.position.y++;
     }
 
+    moveUp(){
+        this.position.y--;
+    }
+
     /**
      * 
      * @param {GameBoard} gameboard 

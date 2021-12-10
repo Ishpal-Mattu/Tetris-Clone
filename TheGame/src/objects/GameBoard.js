@@ -1,7 +1,7 @@
 import Shape from "../entities/Shape.js";
 import BlockColor from "../enums/BlockColor.js";
 import ShapeType from "../enums/ShapeType.js";
-import { BLOCK_SIZE, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y, keys } from "../globals.js";
+import { BLOCK_SIZE, CANVAS_WIDTH, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y, keys, timer } from "../globals.js";
 import BlockFactory from "../services/BlockFactory.js";
 import ShapeFactory from "../services/ShapeFactory.js";
 import Block from "./Block.js";
@@ -33,18 +33,22 @@ export default class GameBoard {
          */
         this.grid = this.getEmptyBoard();
 
-        this.currentShape = ShapeFactory.createInstance();
-        this.nextShape = null;
+        
+        this.createCurrentShape();
+
+        /**
+         * @type {Shape}
+         */
+        this.nextShape = ShapeFactory.createInstance();
         
         /**
          * @type {Shape[]}
          */
         this.placedShapes = [];
 
-        this.currentShape.position.x = GAME_BOARD_WIDTH/2 - 1;
-        this.currentShape.position.y = 0;
         this.deltaTime = 0;
         this.dropTime = 2;
+        this.collisionDelay = this.dropTime;
         this.collisionTime = 0;
         //(x,y) => { list[4*y + x] }
     }
@@ -74,30 +78,38 @@ export default class GameBoard {
     }
 
     update(dt){
+        timer.update(dt);
 
         this.deltaTime += dt;
 		if(this.deltaTime >= this.dropTime){
 			this.deltaTime = 0;
 			this.dropCurrentShape();
-            if(this.collisionTime >= 2){
-                this.placeCurrentShape();
-                this.createCurrentShape();
+            if(this.collisionTime >= this.collisionDelay){
+                this.onPlace();
             }
 		}
 
         this.handleMovement();
         this.currentShape.update();
+        
 
+    }
 
+    onPlace(){
+        this.placeCurrentShape();
+        this.startNextFall();
+    }
+
+    startNextFall() {
+        this.currentShape = this.nextShape;
+        this.currentShape.position.x = GAME_BOARD_WIDTH/2 -1;
+        this.nextShape = ShapeFactory.createInstance();
     }
 
     placeCurrentShape(){
         this.currentShape.onPlace();
         this.collisionTime = 0;
         this.placedShapes.push(this.currentShape);
-        
-        let startRowMatch = -1;
-        let endRowMatch = -1;
 
         for(let x = 0; x < this.currentShape.dimensions.x; x++){
             for(let y = 0; y < this.currentShape.dimensions.y; y++){
@@ -109,25 +121,12 @@ export default class GameBoard {
                 if(block instanceof Block){
                     block.boardX = boardX;
                     block.boardY = boardY;
-
+                    block.update();
                     this.grid[boardY][boardX] = block;
-
-                    if(startRowMatch === -1){
-                        startRowMatch = boardY;
-                    }
-                    else{
-                        endRowMatch = boardY;
-                    }
                 }
                 
             }
         }
-
-        if(startRowMatch === -1)
-            return;
-
-        if(endRowMatch === -1)
-            endRowMatch = startRowMatch;
 
         this.checkRowMatch();
 
@@ -166,7 +165,13 @@ export default class GameBoard {
         }
     }
 
+    /**
+     * 
+     */
     createCurrentShape(){
+        /**
+         * @type {Shape}
+         */
         this.currentShape = ShapeFactory.createInstance();
         this.currentShape.position.x = GAME_BOARD_WIDTH/2 - 1;
         this.currentShape.position.y = 0;
@@ -177,7 +182,7 @@ export default class GameBoard {
         testShape.drop();
 
         if(this.validPosition(testShape)){
-            this.currentShape = testShape;
+            this.currentShape.position.y = testShape.position.y;
         }
         else{
             this.collisionTime++;
@@ -187,6 +192,8 @@ export default class GameBoard {
     handleMovement() {
 
         const testShape = this.currentShape.clone();
+
+        let placeShape = false;
         let didMove = false;
         if(keys.ArrowUp){
 			testShape.rotate();
@@ -208,9 +215,30 @@ export default class GameBoard {
             keys.ArrowDown = false;
             didMove = true;
 		}
+        else if(keys[" "]){
+            while(this.validPosition(testShape)){
+                testShape.drop();
+            }
+            testShape.moveUp();
+            keys[" "] = false;
+            didMove = true;
+            placeShape = true;
+           
+        }
 
         if(didMove && this.validPosition(testShape)){
-            this.currentShape = testShape;
+            
+            
+            if(!placeShape)
+                this.currentShape = testShape;
+            else{
+                
+                timer.tween(this.currentShape.position, ['y'], [testShape.position.y], 0.1, () => {
+                    //this.currentShape.update();
+                    this.onPlace()
+                }); 
+            }
+                
         }
         
     }
