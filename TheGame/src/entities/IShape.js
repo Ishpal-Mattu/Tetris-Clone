@@ -40,7 +40,12 @@ export default class IShape extends Shape{
         const superClone = super.clone();
 
         const clonedShape = new IShape(this.isGhost);
-        Object.assign(clonedShape, superClone);        
+        clonedShape.currentFrame = superClone.currentFrame;
+        clonedShape.dimensions = new Vector(superClone.dimensions.x, superClone.dimensions.y);
+        clonedShape.position = new Vector(superClone.position.x, superClone.position.y);
+        clonedShape.sprites = [...superClone.sprites];
+        clonedShape.tetromino = [...superClone.tetromino];
+        clonedShape.type = superClone.type;        
 
         return clonedShape;
     }

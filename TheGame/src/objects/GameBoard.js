@@ -129,21 +129,18 @@ export default class GameBoard {
         if(endRowMatch === -1)
             endRowMatch = startRowMatch;
 
-        this.checkRowMatch(startRowMatch, endRowMatch);
+        this.checkRowMatch();
 
     }
 
     /**
      * 
-     * @param {Number} startRow 
-     * @param {Number} endRow 
      */
-    checkRowMatch(startRow, endRow){
-        for(let i = endRow; i >= startRow; i--){
-            if(this.grid[i].every(block => !(block instanceof EmptyBlock))){
-                for(let j = 0; j < this.grid[i].length; j++){
-                    this.grid[i][j] = BlockFactory.createInstance(j, i, false, BlockColor.EmptyWhite);
-                }
+    checkRowMatch(){
+        for(let row = this.height-1; row >= 0; row--){
+            if(this.grid[row].every(block => !(block instanceof EmptyBlock))){
+                this.removeRow(row);
+                row++;
             }
         }
     }
@@ -153,8 +150,20 @@ export default class GameBoard {
      * @param {Number} boardRow 
      */
     removeRow(boardRow){
-        //this.grid[boardRow].fill(GameBoard.EMPTY_SPACE);
+        for(let column = 0; column < this.grid[boardRow].length; column++){
+            this.grid[boardRow][column] = BlockFactory.createInstance(column, boardRow, false, BlockColor.EmptyWhite);
+            for(let row = boardRow; row > 0; row--){
+                const tmp = this.grid[row][column];
+                this.grid[row][column] = this.grid[row-1][column];
+                this.grid[row-1][column] = tmp;
 
+                this.grid[row][column].boardY = row;
+                this.grid[row-1][column].boardY = row-1;
+
+                this.grid[row][column].update();
+                this.grid[row-1][column].update();
+            }
+        }
     }
 
     createCurrentShape(){
