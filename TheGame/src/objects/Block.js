@@ -55,12 +55,28 @@ export default class Block extends GameObject{
         context.save();
 
         if(this.isGhost)
-            context.globalAlpha = 0.4;
+            context.globalAlpha = 0.2;
         
         this.sprites[this.currentFrame].render(this.position.x + x, this.position.y + y);
 
         context.restore();
 
+    }
+
+    clone(){
+        const clonedBlock = new Block(new Vector(this.dimensions.x, this.dimensions.y), new Vector(this.position.x, this.position.y), ImageName.BlackBlock, this.isGhost)
+        clonedBlock.sprites = [...this.sprites];
+        clonedBlock.boardX = this.boardX;
+        clonedBlock.boardY = this.boardY;
+        clonedBlock.cleanUp = this.cleanUp;
+        clonedBlock.currentFrame = this.currentFrame;
+        clonedBlock.isCollidable = this.isCollidable;
+        clonedBlock.isGhost = this.isGhost;
+        clonedBlock.isPlaced = this.isPlaced;
+        clonedBlock.isSolid = this.isSolid;
+        clonedBlock.wasCollided = this.wasCollided;
+
+        return clonedBlock;
     }
     
 

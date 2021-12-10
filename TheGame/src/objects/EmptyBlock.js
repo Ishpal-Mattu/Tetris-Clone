@@ -28,4 +28,22 @@ export default class EmptyBlock extends Block{
 
         context.restore();
     }
+
+    clone(){
+        const superClone = super.clone();
+
+        const clonedBlock = new EmptyBlock(superClone.dimensions, superClone.position);
+        clonedBlock.sprites = superClone.sprites;
+        clonedBlock.boardX = superClone.boardX;
+        clonedBlock.boardY = superClone.boardY;
+        clonedBlock.cleanUp = superClone.cleanUp;
+        clonedBlock.currentFrame = superClone.currentFrame;
+        clonedBlock.isCollidable = superClone.isCollidable;
+        clonedBlock.isGhost = superClone.isGhost;
+        clonedBlock.isPlaced = superClone.isPlaced;
+        clonedBlock.isSolid = superClone.isSolid;
+        clonedBlock.wasCollided = superClone.wasCollided;
+
+        return clonedBlock;
+    }
 }

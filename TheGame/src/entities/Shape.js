@@ -26,6 +26,16 @@ export default class Shape extends GameEntity{
         this.cleanUp = false;
     }
 
+    makeGhost(){
+        this.isGhost = true;
+        this.tetromino.forEach(block => {
+                if(block instanceof Block){
+                    block.isGhost = true;
+                }
+            }
+        )
+    }
+
     onPlace(){
         this.isPlaced = true;
         this.tetromino.forEach(block => {
@@ -85,14 +95,6 @@ export default class Shape extends GameEntity{
         this.position.y--;
     }
 
-    /**
-     * 
-     * @param {GameBoard} gameboard 
-     */
-    instantDrop(gameboard){
-
-    }
-
     getBlocks(){
         return this.tetromino;
     }
@@ -140,8 +142,19 @@ export default class Shape extends GameEntity{
         clonedShape.dimensions = new Vector(this.dimensions.x, this.dimensions.y);
         clonedShape.position = new Vector(this.position.x, this.position.y);
         clonedShape.sprites = [...this.sprites];
-        clonedShape.tetromino = [...this.tetromino];
+        
         clonedShape.type = this.type;
+
+        for(let i = 0; i < this.tetromino.length; i++){
+            const block = this.tetromino[i];
+            if(block instanceof Block){
+                clonedShape.tetromino.push(block.clone());
+            }
+            else
+            {
+                clonedShape.tetromino.push(block);
+            }
+        }
 
         return clonedShape;
     }

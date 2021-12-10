@@ -36,6 +36,8 @@ export default class GameBoard {
         
         this.createCurrentShape();
 
+        this.updateGhostShape();
+
         /**
          * @type {Shape}
          */
@@ -91,7 +93,8 @@ export default class GameBoard {
 
         this.handleMovement();
         this.currentShape.update();
-        
+        this.updateGhostShape();
+        this.currentGhostShape.update()
 
     }
 
@@ -189,6 +192,18 @@ export default class GameBoard {
         }
     }
 
+    updateGhostShape(){
+        this.currentGhostShape = this.currentShape.clone();
+        this.currentGhostShape.makeGhost();
+
+        while(this.validPosition(this.currentGhostShape)){
+            this.currentGhostShape.drop();
+        }
+
+        this.currentGhostShape.moveUp();
+
+    }
+
     handleMovement() {
 
         const testShape = this.currentShape.clone();
@@ -228,7 +243,6 @@ export default class GameBoard {
 
         if(didMove && this.validPosition(testShape)){
             
-            
             if(!placeShape)
                 this.currentShape = testShape;
             else{
@@ -266,8 +280,13 @@ export default class GameBoard {
     }
 
     render(){
+
+        this.currentGhostShape.render();
+
         // Renders current shape
         this.currentShape.render();
+
+        
 
         // Renders all grid blocks
         this.renderGridBlocks();
