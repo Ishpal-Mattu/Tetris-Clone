@@ -28,6 +28,11 @@ export default class Shape extends GameEntity{
 
     onPlace(){
         this.isPlaced = true;
+        this.tetromino.forEach(block => {
+            if(block instanceof Block){
+                block.isPlaced = true;
+            }
+        })
     }
 
     onCleanup(){
@@ -92,6 +97,7 @@ export default class Shape extends GameEntity{
      * 
      * @param {Number} x 
      * @param {Number} y 
+     * @returns {Block | Number}
      */
     blockAt(x, y){
         //(x,y) => { list[4*y + x] }
@@ -103,7 +109,7 @@ export default class Shape extends GameEntity{
         for(let i = 0; i<this.tetromino.length; i++){
             let block = this.tetromino[i];
             if(block instanceof Block){
-                block.boardX = this.position.x + i%this.dimensions.x;
+                block.boardX = this.position.x + i % this.dimensions.x;
                 block.boardY = this.position.y + Math.floor(i/this.dimensions.x);
                 block.update();
             }

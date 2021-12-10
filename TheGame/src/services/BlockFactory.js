@@ -2,6 +2,7 @@ import Vector from "../../lib/Vector.js";
 import BlockColor from "../enums/BlockColor.js";
 import ImageName from "../enums/ImageName.js";
 import Block from "../objects/Block.js";
+import EmptyBlock from "../objects/EmptyBlock.js";
 
 export default class BlockFactory {
     static BLOCK_IMAGE = {
@@ -38,6 +39,8 @@ export default class BlockFactory {
                 return new Block(new Vector(Block.WIDTH, Block.HEIGHT), new Vector(xInBoard, yInBoard), this.BLOCK_IMAGE.Orange, isGhostBlock);
             case BlockColor.Green:
                 return new Block(new Vector(Block.WIDTH, Block.HEIGHT), new Vector(xInBoard, yInBoard), this.BLOCK_IMAGE.Green, isGhostBlock);
+            case BlockColor.EmptyWhite:
+                return new EmptyBlock(new Vector(EmptyBlock.WIDTH, EmptyBlock.HEIGHT), new Vector(xInBoard, yInBoard));
             default:
                 return new Block(new Vector(Block.WIDTH, Block.HEIGHT), new Vector(xInBoard, yInBoard), this.BLOCK_IMAGE.Default, isGhostBlock);
         }

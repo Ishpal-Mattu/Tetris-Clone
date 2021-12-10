@@ -5,7 +5,8 @@ const BlockColor = {
     Green: "green",		    // Green
     Blue: "blue",		    // Blue
     Purple: "purple", 		// Purple
-    LightBlue: 'light-blue' // Light Blue
+    LightBlue: 'light-blue', // Light Blue
+    EmptyWhite: 'empty-white',
 };
 
 export default BlockColor;

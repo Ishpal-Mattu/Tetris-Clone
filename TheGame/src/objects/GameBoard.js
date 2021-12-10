@@ -1,8 +1,11 @@
 import Shape from "../entities/Shape.js";
+import BlockColor from "../enums/BlockColor.js";
 import ShapeType from "../enums/ShapeType.js";
 import { BLOCK_SIZE, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y, keys } from "../globals.js";
+import BlockFactory from "../services/BlockFactory.js";
 import ShapeFactory from "../services/ShapeFactory.js";
 import Block from "./Block.js";
+import EmptyBlock from "./EmptyBlock.js";
 
 export default class GameBoard {
 
@@ -18,11 +21,16 @@ export default class GameBoard {
      * @param {Number} width 
      * @param {Number} height 
      */
-    constructor(width, height){
+    constructor(width, height, x = GameBoard.XPOS, y = GameBoard.YPOS){
         
         this.width = width;
         this.height = height;
-        
+        this.x = x;
+        this.y = y;
+
+        /**
+         * @type {Block[][]}
+         */
         this.grid = this.getEmptyBoard();
 
         this.currentShape = ShapeFactory.createInstance();
@@ -46,9 +54,23 @@ export default class GameBoard {
      * @returns A 2D array filled with the value 0
      */
     getEmptyBoard(){
-        return Array.from(
-            {length: this.height}, () => Array(this.width).fill(GameBoard.EMPTY_SPACE)
-        );
+        // return Array.from(
+        //     {length: this.height}, () => Array(this.width).fill(BlockFactory.createInstance())
+        // );
+
+        const grid = [];
+		// For each row in the board...
+		for (let row = 0; row < this.height; row++) {
+			// Insert a new array to represent the row.
+			grid.push([]);
+
+			// For each column in the row...
+			for (let column = 0; column < this.width; column++) {
+				grid[row].push(BlockFactory.createInstance(column, row, false, BlockColor.EmptyWhite));
+			}
+		}
+
+        return grid;
     }
 
     update(dt){
@@ -74,16 +96,41 @@ export default class GameBoard {
         this.collisionTime = 0;
         this.placedShapes.push(this.currentShape);
         
+        let startRowMatch = -1;
+        let endRowMatch = -1;
+
         for(let x = 0; x < this.currentShape.dimensions.x; x++){
             for(let y = 0; y < this.currentShape.dimensions.y; y++){
-                if(this.currentShape.blockAt(x,y) instanceof Block){
-                    const boardX = this.currentShape.position.x + x;
-                    const boardY = this.currentShape.position.y + y;
+                const block = this.currentShape.blockAt(x,y);
+                
+                const boardX = this.currentShape.position.x + x;
+                const boardY = this.currentShape.position.y + y;
+                
+                if(block instanceof Block){
+                    block.boardX = boardX;
+                    block.boardY = boardY;
 
-                    this.grid[boardY][boardX] = GameBoard.BLOCK_SPACE;
+                    this.grid[boardY][boardX] = block;
+
+                    if(startRowMatch === -1){
+                        startRowMatch = boardY;
+                    }
+                    else{
+                        endRowMatch = boardY;
+                    }
                 }
+                
             }
         }
+
+        if(startRowMatch === -1)
+            return;
+
+        if(endRowMatch === -1)
+            endRowMatch = startRowMatch;
+
+        this.checkRowMatch(startRowMatch, endRowMatch);
+
     }
 
     /**
@@ -92,9 +139,11 @@ export default class GameBoard {
      * @param {Number} endRow 
      */
     checkRowMatch(startRow, endRow){
-        for(let i = endRow; i > startRow; i--){
-            if(this.grid[i].every(block => block === GameBoard.BLOCK_SPACE)){
-
+        for(let i = endRow; i >= startRow; i--){
+            if(this.grid[i].every(block => !(block instanceof EmptyBlock))){
+                for(let j = 0; j < this.grid[i].length; j++){
+                    this.grid[i][j] = BlockFactory.createInstance(j, i, false, BlockColor.EmptyWhite);
+                }
             }
         }
     }
@@ -104,8 +153,8 @@ export default class GameBoard {
      * @param {Number} boardRow 
      */
     removeRow(boardRow){
-        this.grid[boardRow].fill(GameBoard.EMPTY_SPACE);
-        
+        //this.grid[boardRow].fill(GameBoard.EMPTY_SPACE);
+
     }
 
     createCurrentShape(){
@@ -113,8 +162,6 @@ export default class GameBoard {
         this.currentShape.position.x = GAME_BOARD_WIDTH/2 - 1;
         this.currentShape.position.y = 0;
     }
-
-
 
     dropCurrentShape(){
         const testShape = this.currentShape.clone();
@@ -167,7 +214,7 @@ export default class GameBoard {
         for(let x = 0; x < shape.dimensions.x; x++){
             for(let y = 0; y < shape.dimensions.y; y++){
                 try {
-                    if(shape.blockAt(x, y) instanceof Block && this.grid[shape.position.y + y][shape.position.x + x] != 0 ){
+                    if(shape.blockAt(x, y) instanceof Block && !(this.grid[shape.position.y + y][shape.position.x + x] instanceof EmptyBlock) ){
                         return false;
                     }
                     
@@ -181,64 +228,22 @@ export default class GameBoard {
         return true;
     }
 
-    // /**
-    //  * Determines if there is a placed shape in the given game board position
-    //  * @param {Number} boardY
-    //  * @param {Number} boardX
-    //  */
-    // isOverlappingOtherShapes(boardY, boardX){
-    //     this.placedShapes.forEach(shape => {
-    //         for(let x = 0; x < shape.dimensions.x; x++){
-    //             for(let y = 0; y < shape.dimensions.y ; y++){
-    //                 if(shape.blockAt(x,y) instanceof Block && (shape.position.y + y === boardY && shape.position.x + x === boardX)){
-    //                     return true;
-    //                 }
-    //             }
-    //         }
-    //     })
-
-    //     return false;
-    // }
-
     render(){
-        let x = GameBoard.XPOS;
-        let y = GameBoard.YPOS;
+        // Renders current shape
+        this.currentShape.render();
 
-        // Renders all shapes in the game area (current shape & placed shapes) (the shape renders each block)
-        this.renderAllShape();
+        // Renders all grid blocks
+        this.renderGridBlocks();
+    }
 
-        context.save();
-        context.strokeStyle = "black";
+    /**
+     * Renders all blocks in the grid (Empty blocks & placed blocks)
+     */
+    renderGridBlocks(){
         for(let i = 0; i < this.height; i++){
             for(let j = 0; j<this.width; j++){
-                if(this.grid[i][j] !== 0){
-                    // TODO: Render the block
-                }
-
-                context.strokeRect(x + j*BLOCK_SIZE, y, BLOCK_SIZE, BLOCK_SIZE);
+                this.grid[i][j].render(this.x, this.y);
             }
-            
-            y+=BLOCK_SIZE;
         }
-
-        context.restore();
-    }
-
-    /**
-     * 
-     * @param {Shape} shape 
-     */
-    renderShape(shape){
-        shape.render();
-    }
-
-    /**
-     * Renders all shapes in the game area.
-     */
-    renderAllShape(){
-        this.currentShape.render();
-        this.placedShapes.forEach( shape => {
-            shape.render();
-        })
     }
 }
