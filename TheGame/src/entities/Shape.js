@@ -123,11 +123,11 @@ export default class Shape extends GameEntity{
         }
     }
 
-    render(){
+    render(x = GAME_BOARD_X, y = GAME_BOARD_Y){
         for(let i = 0; i<this.tetromino.length; i++){
             let block = this.tetromino[i];
             if(block instanceof Block){
-                block.render(GAME_BOARD_X, GAME_BOARD_Y);
+                block.render(x, y);
             }
             
         }

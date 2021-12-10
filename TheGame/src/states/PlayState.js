@@ -28,6 +28,7 @@ export default class PlyState extends State {
 		}
 
 		this.gameBoard.update(dt);
+		this.userInterface.update();
 		
 
 		
