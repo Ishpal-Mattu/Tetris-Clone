@@ -22,15 +22,20 @@ export default class UserInterface {
         this.frameNextWidth = 747 - this.frameNextX;
 
         // Values taken from game frame using paint
-        this.levelX = 90;
-        this.levelY = 262;
-        this.levelWidth = 160 - 25;
+        this.leftTextX = 90;
+        this.frameTextWidth = 160-25;
 
-        // Values taken from game frame using paint
-        this.scoreX = 90;
+        this.levelY = 261;
         this.scoreY = 112;
-        this.scoreWidth = 160 - 25;
+        this.lineY = 409;
 
+        this.frameX = 15;
+        this.frameWidth = 150;
+        this.frameTitleCanvasHeight = 41.5;
+        
+        this.scoreFrameY = 45;
+        this.levelFrameY = 193;
+        this.lineFrameY = 341;
 
         this.sprites = Sprite.generateSpritesFromSpriteSheet(
             images.get(ImageName.GameFrame),
@@ -55,16 +60,27 @@ export default class UserInterface {
 
         context.save();
         //context.font = "50px MinecraftEvenings";
-        context.font = "50px Tetris2";
+        context.font = "40px Tetris2";
         context.textBaseline = 'middle';
         context.textAlign = "center";
         
-        // Display Level & Score
-        context.fillText(this.gameBoard.level.toString(), this.levelX, this.levelY, this.levelWidth);
-        context.fillText(this.gameBoard.score.toString(), this.scoreX, this.scoreY, this.scoreWidth);
+        // Display Level, Score & Lines
+        context.fillText(this.gameBoard.level.toString(), this.leftTextX, this.levelY, this.frameTextWidth);
+        context.fillText(this.gameBoard.score.toString(), this.leftTextX, this.scoreY, this.frameTextWidth);
+        context.fillText(this.gameBoard.lines.toString(), this.leftTextX, this.lineY, this.frameTextWidth);
 
+        // Draw white rectangle in each info frame so we can write on top
+        context.fillStyle = "#ffff";
+        context.fillRect(this.frameX, this.scoreFrameY, this.frameWidth, this.frameTitleCanvasHeight)
+        context.fillRect(this.frameX, this.levelFrameY, this.frameWidth, this.frameTitleCanvasHeight)
+        context.fillRect(this.frameX, this.lineFrameY, this.frameWidth, this.frameTitleCanvasHeight)
 
-
+        // Write the title for each info frame
+        context.font = "30px LiquidItalic";
+        context.fillStyle = "#6ec6e8";
+        context.fillText("Score", this.frameWidth/2 + this.frameX, this.frameTitleCanvasHeight/2 + this.scoreFrameY, this.frameWidth)
+        context.fillText("Level", this.frameWidth/2 + this.frameX, this.frameTitleCanvasHeight/2 + this.levelFrameY, this.frameWidth)
+        context.fillText("Lines", this.frameWidth/2 + this.frameX, this.frameTitleCanvasHeight/2 + this.lineFrameY, this.frameWidth)
 
         context.restore();
 

@@ -34,6 +34,9 @@ export default class GameBoard {
         this.grid = this.getEmptyBoard();
         this.score = 0;
         this.level = 1;
+        this.lines = 0;
+        this.linesToLevelUp = 5;
+        this.levelUpDropTimeChange = 0.75;
         this.levelScorePerLine = {
             0: 0,
             1: 100,
@@ -41,6 +44,9 @@ export default class GameBoard {
             3: 500,
             4: 800
         }
+
+        
+
         this.softDropScorePerRow = 1;
         this.hardDropScorePerRow = 2;
         
@@ -62,6 +68,7 @@ export default class GameBoard {
         this.dropTime = 2;
         this.collisionDelay = this.dropTime;
         this.collisionTime = 0;
+        this.slowDropShapes = true;
         //(x,y) => { list[4*y + x] }
     }
 
@@ -93,7 +100,7 @@ export default class GameBoard {
         timer.update(dt);
 
         this.deltaTime += dt;
-		if(this.deltaTime >= this.dropTime){
+		if(this.deltaTime >= this.dropTime && this.slowDropShapes){
 			this.deltaTime = 0;
 			this.dropCurrentShape();
             if(this.collisionTime >= this.collisionDelay){
@@ -113,7 +120,18 @@ export default class GameBoard {
         this.startNextFall();
     }
 
+    addScore(score){
+        this.score += score;
+    }
+
+    onLevelUp(){
+        this.level++;
+        this.dropTime *= this.levelUpDropTimeChange;
+        this.collisionDelay *= this.levelUpDropTimeChange;
+    }
+
     startNextFall() {
+        this.slowDropShapes = true;
         this.currentShape = this.nextShape;
         this.currentShape.position.x = GAME_BOARD_WIDTH/2 -1;
         this.nextShape = ShapeFactory.createInstance();
@@ -129,12 +147,14 @@ export default class GameBoard {
                 const block = this.currentShape.blockAt(x,y);
                 
                 const boardX = this.currentShape.position.x + x;
-                const boardY = this.currentShape.position.y + y;
+                const boardY = Math.floor(this.currentShape.position.y) + y;
                 
-                if(block instanceof Block){
+                if(typeof(block) != "number"){
                     block.boardX = boardX;
                     block.boardY = boardY;
                     block.update();
+                    console.log(this.grid);
+                    console.log(this.grid[boardY][boardX]);
                     this.grid[boardY][boardX] = block;
                 }
                 
@@ -158,8 +178,11 @@ export default class GameBoard {
             }
         }
 
-        this.score += this.levelScorePerLine[matchNum] * this.level;
-        
+        this.addScore(this.levelScorePerLine[matchNum] * this.level);
+        this.lines += matchNum;
+        if(this.lines >= this.level * this.linesToLevelUp){
+            this.onLevelUp();
+        }
     }
 
     /**
@@ -242,34 +265,41 @@ export default class GameBoard {
 		}
 		else if(keys.ArrowDown){
             testShape.drop();
-            this.score += this.softDropScorePerRow;
-            keys.ArrowDown = false;
             didMove = true;
 		}
         else if(keys[" "]){
-            while(this.validPosition(testShape)){
+            let scoretoAdd = 0;
+            do{
                 testShape.drop();
-                this.score += this.hardDropScorePerRow;
-            }
+                scoretoAdd += this.hardDropScorePerRow;
+            }while(this.validPosition(testShape))
             testShape.moveUp();
-            this.score -= this.hardDropScorePerRow;
+            
+            scoretoAdd -= this.hardDropScorePerRow;
+            this.addScore(scoretoAdd);
             keys[" "] = false;
             didMove = true;
             placeShape = true;
            
         }
 
-        if(didMove && this.validPosition(testShape)){
-            
-            if(!placeShape)
-                this.currentShape = testShape;
-            else{
+        if(didMove){
+
+            if(this.validPosition(testShape))
+            {
+                if(keys.ArrowDown)
+                    this.addScore(this.softDropScorePerRow);
                 
-                timer.tween(this.currentShape.position, ['y'], [testShape.position.y], 0.1, () => {
-                    //this.currentShape.update();
-                    this.onPlace()
-                }); 
+                if(!placeShape)
+                    this.currentShape = testShape;
+                else{
+                    const onPlaceCallback = this.onPlace.bind(this);
+                    this.slowDropShapes = false;
+                    timer.tween(this.currentShape.position, ['y'], [testShape.position.y], 0.1, onPlaceCallback); 
+                }
             }
+            
+            keys.ArrowDown = false;
                 
         }
         

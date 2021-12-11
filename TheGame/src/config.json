@@ -92,12 +92,17 @@
 		},
 		{
 			"name": "NewTetrisRegular",
-			"path": ""
+			"path": "./assets/fonts/NewTetrisRegular.ttf"
 		},
 		{
 			"name": "TetrisBlocks2",
 			"path": "./assets/fonts/TetrisBlocks20-oKwA.otf"
+		},
+		{
+			"name": "LiquidItalic",
+			"path": "./assets/fonts/Liquid-Italic.ttf"
 		}
+
 	],
 	"sounds": [
 		{
