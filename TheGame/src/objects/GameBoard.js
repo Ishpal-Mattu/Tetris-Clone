@@ -76,6 +76,7 @@ export default class GameBoard {
             3: 500,
             4: 800
         }
+        this.isGameOver = false;
 
         // Points awarded per row droped for soft and hard drop
         this.softDropScorePerRow = 1;
@@ -168,11 +169,15 @@ export default class GameBoard {
         this.currentShape = this.nextShape;
         this.currentShape.position.x = GAME_BOARD_WIDTH/2 -1;
         this.nextShape = ShapeFactory.createInstance();
+        if(!this.validPosition(this.currentShape))
+            this.isGameOver = true;
     }
 
     resetCurrentFall(){
         this.currentShape.position.x = this.shapeStartPosition.x;
         this.currentShape.position.y = this.shapeStartPosition.y;
+        if(!this.validPosition(this.currentShape))
+            this.isGameOver = true;
     }
 
     placeCurrentShape(){

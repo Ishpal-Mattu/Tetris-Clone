@@ -31,10 +31,10 @@ import {
 } from "./globals.js";
 import PlayState from "./states/PlayState.js";
 import GameOverState from "./states/GameOverState.js";
-import VictoryState from "./states/VictoryState.js";
 import TitleScreenState from "./states/TitleScreenState.js";
 import HighScoreState from "./states/HighScoreState.js";
 import InstructionsState from "./states/InstructionsState.js";
+import EnterHighScoreState from "./states/EnterHighScoreState.js";
 
 // Fetch the asset definitions from config.json.
 const {
@@ -54,7 +54,7 @@ stateMachine.add(GameStateName.TitleScreen, new TitleScreenState());
 stateMachine.add(GameStateName.Highscore, new HighScoreState());
 stateMachine.add(GameStateName.Instructions, new InstructionsState());
 stateMachine.add(GameStateName.GameOver, new GameOverState());
-stateMachine.add(GameStateName.Victory, new VictoryState());
+stateMachine.add(GameStateName.EnterHighScore, new EnterHighScoreState());
 stateMachine.add(GameStateName.Play, new PlayState());
 
 stateMachine.change(GameStateName.Play);
