@@ -22,7 +22,9 @@ export default class LShape extends Shape{
     }
 
     initializeTetrimono(){
-        const tetromino = [{}, 0, 0, {}, 0, 0, {}, {}, 0];
+        const tetromino = [ 0,  0, {}, 
+                           {}, {}, {}, 
+                            0,  0,  0];
 
         for(let i = 0; i < tetromino.length; i++){
             if(typeof tetromino[i] !== "number"){

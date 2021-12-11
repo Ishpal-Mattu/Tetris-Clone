@@ -20,7 +20,7 @@ export default class Shape extends GameEntity{
 
         this.isGhost = isGhost;
         //this.direction = Direction.Up;
-        this.tetromino = [];
+        this.tetromino = this.initializeTetrimono();
         this.type = null;
         this.isPlaced = false;
         this.cleanUp = false;
@@ -131,6 +131,10 @@ export default class Shape extends GameEntity{
             }
             
         }
+    }
+
+    initializeTetrimono(){
+        return [];
     }
 
     /**

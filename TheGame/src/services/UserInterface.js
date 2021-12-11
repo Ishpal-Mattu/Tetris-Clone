@@ -20,6 +20,7 @@ export default class UserInterface {
         this.nextFrameY = 42;
         this.nextFrameInnerY = 50;
         this.holdFrameY = 250;
+        this.holdFrameInnerY = 258;
 
         this.rightFrameInnerX = 607;
         this.rightFrameTextHeight = 190 - this.nextFrameInnerY;       
@@ -56,6 +57,7 @@ export default class UserInterface {
 
     update(){
         this.gameBoard.nextShape.update();
+        this.gameBoard.holdShape?.update();
     }
 
 
@@ -68,8 +70,15 @@ export default class UserInterface {
         // Display Next Shape
         const nextShapeRenderX = this.rightFrameInnerX + (this.rightFrameTextWidth - this.gameBoard.nextShape.dimensions.x * BLOCK_SIZE)/2
         const nextShapeRenderY = this.nextFrameInnerY + (this.rightFrameTextHeight - this.gameBoard.nextShape.dimensions.y * BLOCK_SIZE)/2
-        this.gameBoard.nextShape.render(nextShapeRenderX + this.determineNextShapeXOfset(), nextShapeRenderY + this.determineNextShapeYOfset())
+        this.gameBoard.nextShape.render(nextShapeRenderX + this.determineShapeXOfset(this.gameBoard.nextShape), nextShapeRenderY + this.determineShapeYOfset(this.gameBoard.nextShape))
 
+        // Display Hold Shape if any
+        if(this.gameBoard.holdShape){
+            const holdShapeRenderX = this.rightFrameInnerX + (this.rightFrameTextWidth - this.gameBoard.holdShape.dimensions.x * BLOCK_SIZE)/2
+            const holdShapeRenderY = this.holdFrameInnerY + (this.rightFrameTextHeight - this.gameBoard.holdShape.dimensions.y * BLOCK_SIZE)/2;
+            this.gameBoard.holdShape.render(holdShapeRenderX + this.determineShapeXOfset(this.gameBoard.holdShape), holdShapeRenderY + this.determineShapeYOfset(this.gameBoard.holdShape));    
+        }
+        
         context.save();
         context.font = "40px Tetris2";
         context.textBaseline = 'middle';
@@ -101,16 +110,16 @@ export default class UserInterface {
         
     }
 
-    determineNextShapeXOfset(){
-        switch(this.gameBoard.nextShape.type){
-            case(ShapeType.i ): return -BLOCK_SIZE/2;
-            case(ShapeType.j ): return -BLOCK_SIZE/2;
-            case(ShapeType.l ): return BLOCK_SIZE/2;
+    determineShapeXOfset(shape){
+        switch(shape.type){
             default: return 0
         }
     }
-    determineNextShapeYOfset(){
-        switch(this.gameBoard.nextShape.type){
+    determineShapeYOfset(shape){
+        switch(shape.type){
+            case(ShapeType.i ): return BLOCK_SIZE/2;
+            case(ShapeType.j ): return BLOCK_SIZE/2;
+            case(ShapeType.l ): return BLOCK_SIZE/2;
             case(ShapeType.s ): return BLOCK_SIZE/2;
             case(ShapeType.t ): return BLOCK_SIZE/2;
             case(ShapeType.z ): return BLOCK_SIZE/2;

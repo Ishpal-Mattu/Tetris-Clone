@@ -1,3 +1,4 @@
+import Vector from "../../lib/Vector.js";
 import Shape from "../entities/Shape.js";
 import BlockColor from "../enums/BlockColor.js";
 import ShapeType from "../enums/ShapeType.js";
@@ -22,22 +23,53 @@ export default class GameBoard {
      * @param {Number} height 
      */
     constructor(width, height, x = GameBoard.XPOS, y = GameBoard.YPOS){
-        
+        // Game board locations/size info
         this.width = width;
         this.height = height;
         this.x = x;
         this.y = y;
+        this.shapeStartPosition = new Vector(this.width/2 - 1, 0);
 
         /**
          * @type {Block[][]}
          */
-        this.grid = this.getEmptyBoard();
+        this.grid = this.getEmptyBoard();   // Creates grid with empty blocks
+
+                
+        // Create current + ghost + next shape
+        this.createCurrentShape();
+        this.updateGhostShape();
+        /**
+         * @type {Shape}
+         */
+        this.nextShape = ShapeFactory.createInstance();
+        /**
+         * @type {Shape}
+         */
+        this.holdShape = null;
+        this.isHoldShapeAvailable = true;
+
+        /**
+         * @type {Shape[]}
+         */
+        this.placedShapes = [];     // Only here for debug purposes (not needed for game functionality).
+
+        this.deltaTime = 0;     // Tracks the delta time
+        this.dropDelay = 2;      // Time in sec to wait before automatically dropping current shape by 1 row
+
+        //Time in sec to wait before placing the shape on collision
+        //with floor or other shape. (time given is multiplied by the dropDelay)
+        this.collisionDelay = this.dropDelay;    
+        this.collisionTime = 0;     // Tracks the collision time
+        this.slowDropShapes = true;  // Whether or not current shape should drop 1 row every dropDelay.
+
+        // Game info
         this.score = 0;
         this.level = 1;
         this.lines = 0;
-        this.linesToLevelUp = 5;
-        this.levelUpDropTimeChange = 0.75;
-        this.levelScorePerLine = {
+        this.linesToLevelUp = 5;    // Lines needed per level in order to level up
+        this.levelUpDropTimeChange = 0.75;  // % of dropTime to use each time we level up
+        this.levelScorePerLine = {  // Score awarded for each line combos. (score should be multiplied by the level)
             0: 0,
             1: 100,
             2: 300,
@@ -45,36 +77,14 @@ export default class GameBoard {
             4: 800
         }
 
-        
-
+        // Points awarded per row droped for soft and hard drop
         this.softDropScorePerRow = 1;
         this.hardDropScorePerRow = 2;
-        
-        this.createCurrentShape();
-
-        this.updateGhostShape();
-
-        /**
-         * @type {Shape}
-         */
-        this.nextShape = ShapeFactory.createInstance();
-        
-        /**
-         * @type {Shape[]}
-         */
-        this.placedShapes = [];
-
-        this.deltaTime = 0;
-        this.dropTime = 2;
-        this.collisionDelay = this.dropTime;
-        this.collisionTime = 0;
-        this.slowDropShapes = true;
-        //(x,y) => { list[4*y + x] }
     }
 
     /**
      * 
-     * @returns A 2D array filled with the value 0
+     * @returns A 2D array filled with the EmptyBlock instances
      */
     getEmptyBoard(){
         // return Array.from(
@@ -100,7 +110,7 @@ export default class GameBoard {
         timer.update(dt);
 
         this.deltaTime += dt;
-		if(this.deltaTime >= this.dropTime && this.slowDropShapes){
+		if(this.deltaTime >= this.dropDelay && this.slowDropShapes){
 			this.deltaTime = 0;
 			this.dropCurrentShape();
             if(this.collisionTime >= this.collisionDelay){
@@ -118,15 +128,38 @@ export default class GameBoard {
     onPlace(){
         this.placeCurrentShape();
         this.startNextFall();
+        this.isHoldShapeAvailable = true;
     }
 
     addScore(score){
         this.score += score;
     }
 
+    onHoldShape(){
+        this.isHoldShapeAvailable = false;
+
+        // Switch hold & current shape
+        const tmp = this.holdShape;
+        this.holdShape = this.currentShape;
+        this.currentShape = tmp;
+
+        // Reset hold shape position
+        this.holdShape.position.x = 0;
+        this.holdShape.position.y = 0;
+        this.holdShape.tetromino = this.holdShape.initializeTetrimono();
+
+        if(!this.currentShape){
+            this.startNextFall();
+        }
+        else{
+            this.resetCurrentFall();
+        }
+
+    }
+
     onLevelUp(){
         this.level++;
-        this.dropTime *= this.levelUpDropTimeChange;
+        this.dropDelay *= this.levelUpDropTimeChange;
         this.collisionDelay *= this.levelUpDropTimeChange;
     }
 
@@ -135,6 +168,11 @@ export default class GameBoard {
         this.currentShape = this.nextShape;
         this.currentShape.position.x = GAME_BOARD_WIDTH/2 -1;
         this.nextShape = ShapeFactory.createInstance();
+    }
+
+    resetCurrentFall(){
+        this.currentShape.position.x = this.shapeStartPosition.x;
+        this.currentShape.position.y = this.shapeStartPosition.y;
     }
 
     placeCurrentShape(){
@@ -214,8 +252,7 @@ export default class GameBoard {
          * @type {Shape}
          */
         this.currentShape = ShapeFactory.createInstance();
-        this.currentShape.position.x = GAME_BOARD_WIDTH/2 - 1;
-        this.currentShape.position.y = 0;
+        this.resetCurrentFall()
     }
 
     dropCurrentShape(){
@@ -244,10 +281,20 @@ export default class GameBoard {
 
     handleMovement() {
 
+        if(keys.c){
+            keys.c = false;
+            if(this.isHoldShapeAvailable){
+                this.onHoldShape();
+                return;
+            }
+        }
+
         const testShape = this.currentShape.clone();
 
         let placeShape = false;
         let didMove = false;
+        
+        
         if(keys.ArrowUp){
 			testShape.rotate();
             keys.ArrowUp = false;
