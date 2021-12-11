@@ -87,8 +87,16 @@
 			"path": "./assets/fonts/tank.ttf"
 		},
 		{
+			"name": "Tetris2",
+			"path": "./assets/fonts/Tetris2-VP0w.ttf"
+		},
+		{
 			"name": "NewTetrisRegular",
-			"path": "./assets/fonts/NewTetrisRegular.ttf"
+			"path": ""
+		},
+		{
+			"name": "TetrisBlocks2",
+			"path": "./assets/fonts/TetrisBlocks20-oKwA.otf"
 		}
 	],
 	"sounds": [

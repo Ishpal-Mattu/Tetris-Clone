@@ -32,7 +32,17 @@ export default class GameBoard {
          * @type {Block[][]}
          */
         this.grid = this.getEmptyBoard();
-
+        this.score = 0;
+        this.level = 1;
+        this.levelScorePerLine = {
+            0: 0,
+            1: 100,
+            2: 300,
+            3: 500,
+            4: 800
+        }
+        this.softDropScorePerRow = 1;
+        this.hardDropScorePerRow = 2;
         
         this.createCurrentShape();
 
@@ -139,12 +149,17 @@ export default class GameBoard {
      * 
      */
     checkRowMatch(){
+        let matchNum = 0;
         for(let row = this.height-1; row >= 0; row--){
             if(this.grid[row].every(block => !(block instanceof EmptyBlock))){
                 this.removeRow(row);
+                matchNum++;
                 row++;
             }
         }
+
+        this.score += this.levelScorePerLine[matchNum] * this.level;
+        
     }
 
     /**
@@ -227,14 +242,17 @@ export default class GameBoard {
 		}
 		else if(keys.ArrowDown){
             testShape.drop();
+            this.score += this.softDropScorePerRow;
             keys.ArrowDown = false;
             didMove = true;
 		}
         else if(keys[" "]){
             while(this.validPosition(testShape)){
                 testShape.drop();
+                this.score += this.hardDropScorePerRow;
             }
             testShape.moveUp();
+            this.score -= this.hardDropScorePerRow;
             keys[" "] = false;
             didMove = true;
             placeShape = true;

@@ -61,12 +61,12 @@ export default class TitleScreenState extends State {
 	}
 
 	render() { 
-		context.globalAlpha = 0.8;
+		context.globalAlpha = 0.7;
 		images.render("blockBackground", 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.globalAlpha = 1;
 
 		context.save();
-		context.font = "125px NewTetrisRegular";
+		context.font = "125px TetrisBlocks2";
 		context.textBaseline = 'middle';
 
 		// Array for each letter's color
@@ -79,9 +79,9 @@ export default class TitleScreenState extends State {
 			ColorScheme.Purple, 	// Purple
 		]
 		
-		const TITLE_STRING = "TETRIS";
+		const TITLE_STRING = "tetris";
 		const TITLE_STRING_WIDTH = context.measureText(TITLE_STRING).width;
-		const TITLE_ARRAY = "TETRIS".split('');
+		const TITLE_ARRAY = "tetris".split('');
 
 		// The starting x and y cordinate for writing title text
 		const titleY = CANVAS_HEIGHT * 0.30;

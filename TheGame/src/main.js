@@ -12,7 +12,8 @@
  * - Gameover Text: <a href="https://www.vecteezy.com/free-vector/green">Green Vectors by Vecteezy</a>
  * 
  * Fonts:
- * - Tetris font : https://fontsgeek.com/fonts/NEW-TETRIS-Regular
+ * - NewTetrisRegular font : https://fontsgeek.com/fonts/NEW-TETRIS-Regular
+ * - Tetris2 font: https://www.fontspace.com/tetris-2-font-f11520 
  */
 
 
