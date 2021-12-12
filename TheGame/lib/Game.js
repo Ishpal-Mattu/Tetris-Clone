@@ -2,6 +2,7 @@ import StateMachine from "./StateMachine.js";
 
 export default class Game {
 	static updateDelay = false;
+	static mute = false;
 	/**
 	 * Contains our game loop logic so that `main.js` stays clean.
 	 *

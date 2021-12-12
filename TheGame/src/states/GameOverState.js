@@ -1,8 +1,10 @@
 import { roundRect } from "../../lib/CanvasHelper.js";
+import Game from "../../lib/Game.js";
 import State from "../../lib/State.js";
 import ColorScheme from "../enums/ColorScheme.js";
 import GameStateName from "../enums/GameStateName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, stateMachine } from "../globals.js";
+import SoundName from "../enums/SoundName.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, sounds, stateMachine } from "../globals.js";
 import HighScoreManager from "../services/HighScoreManager.js";
 
 export default class GameOverState extends State {
@@ -11,19 +13,25 @@ export default class GameOverState extends State {
 	}
 
 	enter(parameters){
+		this.toggleBackgroundSounds();
 		this.score = parameters.score;
 		this.highScores = HighScoreManager.loadHighScores();
 	}
 
 	update(dt){
+		this.toggleBackgroundSounds();
 		if(keys.Enter){
 			keys.Enter = false;
+			sounds.stop(SoundName.Confirm)
+			sounds.play(SoundName.Confirm);
 
+			sounds.pause(SoundName.MenuBackground);
 			stateMachine.change(GameStateName.Play);
 
 		}
 
 		if(keys.Escape){
+			sounds.play(SoundName.Back);
 			stateMachine.change(GameStateName.TitleScreen);
 		}
 	}
@@ -78,5 +86,12 @@ export default class GameOverState extends State {
 		context.fillText(`Press Escape to return to the main menu!`, CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.85);
 		context.restore();
 
+	}
+
+	toggleBackgroundSounds(){
+		if(sounds.mute)
+			sounds.pause(SoundName.MenuBackground);
+		else
+			sounds.play(SoundName.MenuBackground);
 	}
 }

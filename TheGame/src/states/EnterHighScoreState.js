@@ -12,6 +12,10 @@ import State from "../../lib/State.js";
 import GameStateName from "../enums/GameStateName.js";
 import ColorScheme from "../enums/ColorScheme.js";
 import { roundRect } from "../../lib/CanvasHelper.js";
+import SoundName from "../enums/SoundName.js";
+import Game from "../../lib/Game.js";
+import Confetti from "../objects/Confetti.js";
+import Vector from "../../lib/Vector.js";
 
 /**
  * Screen that allows us to input a new high score in the form of three characters, arcade-style.
@@ -29,14 +33,19 @@ export default class EnterHighScoreState extends State {
 	}
 
 	enter(parameters) {
+		sounds.stop(SoundName.HighScore);
+		sounds.play(SoundName.HighScore);
         this.gameBoard = parameters.gameBoard;
         this.gameInterface = parameters.userInterface;
 		this.score = this.gameBoard.score;
 		this.highlightedChar = 0;
-        
+        this.toggleBackgroundSounds();
+		this.confetti = new Confetti(new Vector(Confetti.TILE_SIZE, Confetti.TILE_SIZE), new Vector(this.x + (this.width/2), this.y + (this.height/2)))
 	}
 
 	update(dt) {
+		this.toggleBackgroundSounds();
+		this.confetti.update(dt);
 		if (keys.Enter) {
 			keys.Enter = false;
 
@@ -51,25 +60,29 @@ export default class EnterHighScoreState extends State {
 		if (keys.ArrowLeft) {
 			keys.ArrowLeft = false;
 
-            if(this.highlightedChar > 0)
+            if(this.highlightedChar > 0){
 			    this.highlightedChar = this.highlightedChar - 1;
-
-            // TODO : Play select sound
-			//sounds.select.play();
+				sounds.play(SoundName.Select);
+			}
+			else
+				sounds.play(SoundName.NoSelect);
 		}
 		else if (keys.ArrowRight) {
 			keys.ArrowRight = false;
 
-            if(this.highlightedChar < 2)
+            if(this.highlightedChar < 2){
 			    this.highlightedChar = this.highlightedChar + 1;
-
-            // TODO : Play select sound
-			//sounds.select.play();
+				sounds.play(SoundName.Select);
+			}
+			else
+				sounds.play(SoundName.NoSelect);
 		}
 
 		// Scroll through characters.
 		if (keys.ArrowUp) {
 			keys.ArrowUp = false;
+			sounds.stop(SoundName.Select);
+			sounds.play(SoundName.Select);
 			this.chars[this.highlightedChar] = this.chars[this.highlightedChar] + 1;
 			if (this.chars[this.highlightedChar] > 90) {
 				this.chars[this.highlightedChar] = 65;
@@ -77,6 +90,8 @@ export default class EnterHighScoreState extends State {
 		}
 		else if (keys.ArrowDown) {
 			keys.ArrowDown = false;
+			sounds.stop(SoundName.Select);
+			sounds.play(SoundName.Select);
 			this.chars[this.highlightedChar] = this.chars[this.highlightedChar] - 1;
 			if (this.chars[this.highlightedChar] < 65) {
 				this.chars[this.highlightedChar] = 90;
@@ -85,7 +100,7 @@ export default class EnterHighScoreState extends State {
 	}
 
 	render() {
-		//images.background.render(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		
 
         this.gameInterface.render();
         this.gameBoard.render();
@@ -114,5 +129,14 @@ export default class EnterHighScoreState extends State {
 		context.textAlign = 'center';
 		context.fillText(`Press Enter to confirm!`, this.width * 0.5 + this.x, this.height * 0.9 + this.y);
 		context.restore();
+
+		this.confetti.render();
+	}
+
+	toggleBackgroundSounds(){
+		if(sounds.mute)
+			sounds.pause(SoundName.MenuBackground);
+		else
+			sounds.play(SoundName.MenuBackground);
 	}
 }

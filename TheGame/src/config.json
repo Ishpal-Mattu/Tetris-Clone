@@ -83,6 +83,12 @@
 			"path": "./assets/images/Dark-grid-background.png",
 			"width": 350,
 			"height": 700
+		},
+		{
+			"name": "confetti",
+			"path": "./assets/images/Confetti.png",
+			"width": 4096,
+			"height": 4096
 		}
 	],
 	"fonts": [
@@ -124,15 +130,83 @@
 			"volume": 0.1
 		},
 		{
-			"name": "menu",
+			"name": "menuBackground",
 			"path": "./assets/sounds/menu.ogg",
+			"size": 1,
+			"volume": 0.08,
+			"loop": true
+		},
+		{
+			"name": "gameBackground",
+			"path": "./assets/sounds/gameBackground.wav",
+			"size": 1,
+			"volume": 0.06,
+			"loop": true
+		},
+		{
+			"name": "shapePlace",
+			"path": "./assets/sounds/shapePlace.ogg",
+			"size": 1,
+			"volume": 0.2
+		},
+		{
+			"name": "confirm",
+			"path": "./assets/sounds/confirm.wav",
 			"size": 1,
 			"volume": 0.1
 		},
 		{
-			"name": "shapePlace",
-			"path": "./assets/sounds/shapePlace.wav",
+			"name": "fourRowClear",
+			"path": "./assets/sounds/fourRowClear.ogg",
 			"size": 5,
+			"volume": 0.2
+		},
+		{
+			"name": "levelUp",
+			"path": "./assets/sounds/levelUp.ogg",
+			"size": 10,
+			"volume": 0.2
+		},
+		{
+			"name": "mute",
+			"path": "./assets/sounds/mute.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "no-select",
+			"path": "./assets/sounds/no-select.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "rotate",
+			"path": "./assets/sounds/rotate.ogg",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "rowClear",
+			"path": "./assets/sounds/rowClear.ogg",
+			"size": 10,
+			"volume": 0.2
+		},
+		{
+			"name": "select",
+			"path": "./assets/sounds/select.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "gameOver",
+			"path": "./assets/sounds/gameOver.ogg",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "highScore",
+			"path": "./assets/sounds/highScore.mp3",
+			"size": 1,
 			"volume": 0.1
 		}
 	]

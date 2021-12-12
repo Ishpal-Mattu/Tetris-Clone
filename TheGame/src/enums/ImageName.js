@@ -12,6 +12,7 @@ const ImageName = {
     GameFrame: 'gameFrame',
     GridBackground: 'gridBackground',
     FrameBackground: 'frameBackground',
+    Confetti: 'confetti',
 };
 
 export default ImageName;

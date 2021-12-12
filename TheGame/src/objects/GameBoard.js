@@ -2,7 +2,8 @@ import Vector from "../../lib/Vector.js";
 import Shape from "../entities/Shape.js";
 import BlockColor from "../enums/BlockColor.js";
 import ShapeType from "../enums/ShapeType.js";
-import { BLOCK_SIZE, CANVAS_WIDTH, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y, keys, timer } from "../globals.js";
+import SoundName from "../enums/SoundName.js";
+import { BLOCK_SIZE, CANVAS_WIDTH, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y, keys, sounds, timer } from "../globals.js";
 import BlockFactory from "../services/BlockFactory.js";
 import ShapeFactory from "../services/ShapeFactory.js";
 import Block from "./Block.js";
@@ -128,6 +129,8 @@ export default class GameBoard {
 
     onPlace(){
         this.placeCurrentShape();
+        sounds.stop(SoundName.ShapePlace);
+        sounds.play(SoundName.ShapePlace);
         this.startNextFall();
         this.isHoldShapeAvailable = true;
     }
@@ -138,6 +141,7 @@ export default class GameBoard {
 
     onHoldShape(){
         this.isHoldShapeAvailable = false;
+        sounds.play(SoundName.Confirm);
 
         // Switch hold & current shape
         const tmp = this.holdShape;
@@ -159,6 +163,8 @@ export default class GameBoard {
     }
 
     onLevelUp(){
+        sounds.stop(SoundName.LevelUp);
+        sounds.play(SoundName.LevelUp);
         this.level++;
         this.dropDelay *= this.levelUpDropTimeChange;
         this.collisionDelay *= this.levelUpDropTimeChange;
@@ -204,6 +210,7 @@ export default class GameBoard {
             }
         }
 
+
         this.checkRowMatch();
 
     }
@@ -213,12 +220,23 @@ export default class GameBoard {
      */
     checkRowMatch(){
         let matchNum = 0;
+        const MAX_MATCH = 4;
         for(let row = this.height-1; row >= 0; row--){
             if(this.grid[row].every(block => !(block instanceof EmptyBlock))){
                 this.removeRow(row);
                 matchNum++;
                 row++;
             }
+        }
+
+        if(matchNum >= MAX_MATCH){
+            //sounds.stop(SoundName.FourRow)
+            sounds.play(SoundName.FourRow);
+        }
+        
+        if(matchNum >= 1 && matchNum < MAX_MATCH){
+            //sounds.stop(SoundName.RowClear);
+            sounds.play(SoundName.RowClear);
         }
 
         this.addScore(this.levelScorePerLine[matchNum] * this.level);
@@ -302,21 +320,29 @@ export default class GameBoard {
         
         if(keys.ArrowUp){
 			testShape.rotate();
+            sounds.stop(SoundName.Rotate);
+            sounds.play(SoundName.Rotate);
             keys.ArrowUp = false;
             didMove = true;
 		}
 		else if(keys.ArrowLeft){
             testShape.moveLeft()
+            sounds.stop(SoundName.Select)
+            sounds.play(SoundName.Select);
             keys.ArrowLeft = false;
             didMove = true;
 		}
 		else if(keys.ArrowRight){
             testShape.moveRight();
+            sounds.stop(SoundName.Select)
+            sounds.play(SoundName.Select);
             keys.ArrowRight = false;
             didMove = true;
 		}
 		else if(keys.ArrowDown){
             testShape.drop();
+            sounds.stop(SoundName.Select)
+            sounds.play(SoundName.Select);
             didMove = true;
 		}
         else if(keys[" "]){

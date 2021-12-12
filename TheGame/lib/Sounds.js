@@ -3,6 +3,7 @@ import SoundPool from "./SoundPool.js";
 export default class Sounds {
 	constructor() {
 		this.sounds = {};
+		this.mute = false;
 	}
 
 	load(soundDefinitions) {
@@ -21,7 +22,8 @@ export default class Sounds {
 	}
 
 	play(name) {
-		this.get(name).play();
+		if(!this.mute)
+			this.get(name).play();
 	}
 
 	pause(name) {
@@ -30,5 +32,12 @@ export default class Sounds {
 
 	stop(name) {
 		this.get(name).stop()
+	}
+
+	toggleMute(){
+		if(this.mute)
+			this.mute = false;
+		else
+			this.mute = true;
 	}
 }

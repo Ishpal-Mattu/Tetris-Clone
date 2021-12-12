@@ -3,7 +3,8 @@ import State from "../../lib/State.js";
 import ColorScheme from "../enums/ColorScheme.js";
 import GameStateName from "../enums/GameStateName.js";
 import ImageName from "../enums/ImageName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, sounds, stateMachine } from "../globals.js";
+import SoundName from "../enums/SoundName.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, mute, sounds, stateMachine } from "../globals.js";
 
 export default class TitleScreenState extends State {
 	constructor() {
@@ -21,34 +22,45 @@ export default class TitleScreenState extends State {
 
 	enter(parameters) { 
 		this.highlighted = this.menuOptions.start;
+		this.toggleBackgroundSounds();
 	}
 
 	exit() { 
-
+		
 	}
 
 	update(dt) { 
+		
+		this.toggleBackgroundSounds();
+		
 		// Toggle highlighted option if we press w or s.
 		if(keys.ArrowUp){
 			keys.ArrowUp = false;
 			this.highlighted = this.highlighted === this.menuOptions.instructions ? this.menuOptions.highScores : this.highlighted === this.menuOptions.highScores ? this.menuOptions.start : this.menuOptions.instructions;
 			
-			//TODO - Play selection sound
+			sounds.stop(SoundName.Select)
+			sounds.play(SoundName.Select);
+			
 		}
 		else if(keys.ArrowDown){
 			keys.ArrowDown = false;
 			this.highlighted = this.highlighted === this.menuOptions.instructions ? this.menuOptions.start : this.highlighted === this.menuOptions.start ? this.menuOptions.highScores : this.menuOptions.instructions;
 			
-			//TODO - Play selection sound
+			sounds.stop(SoundName.Select)
+			sounds.play(SoundName.Select);
+			
 		}
 
 		// Confirm whichever option we have selected to change screens.
 		if (keys.Enter) {
 			keys.Enter = false;
+
+			sounds.stop(SoundName.Confirm);
+			sounds.play(SoundName.Confirm);
 			
-			// TODO - Play confirm sound
 
 			if (this.highlighted === this.menuOptions.start) {
+				sounds.pause(SoundName.MenuBackground);
 				stateMachine.change(GameStateName.Play);
 			}
 			else if(this.highlighted === this.menuOptions.highScores){
@@ -106,5 +118,12 @@ export default class TitleScreenState extends State {
 		context.fillText(`${this.menuOptions.instructions}`, CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.89);
 
 		context.restore();
+	}
+
+	toggleBackgroundSounds(){
+		if(sounds.mute)
+			sounds.pause(SoundName.MenuBackground);
+		else
+			sounds.play(SoundName.MenuBackground);
 	}
 }

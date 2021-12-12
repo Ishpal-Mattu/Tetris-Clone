@@ -14,6 +14,10 @@
  * Fonts:
  * - NewTetrisRegular font : https://fontsgeek.com/fonts/NEW-TETRIS-Regular
  * - Tetris2 font: https://www.fontspace.com/tetris-2-font-f11520 
+ * 
+ * Sounds:
+ * - Most sounds: https://csanyk.itch.io/gmltetris
+ * - High score: https://orangefreesounds.com/new-high-score-sound-effect/ 
  */
 
 
@@ -26,6 +30,7 @@ import {
 	fonts,
 	images,
 	keys,
+	mute,
 	sounds,
 	stateMachine,
 } from "./globals.js";
@@ -35,6 +40,7 @@ import TitleScreenState from "./states/TitleScreenState.js";
 import HighScoreState from "./states/HighScoreState.js";
 import InstructionsState from "./states/InstructionsState.js";
 import EnterHighScoreState from "./states/EnterHighScoreState.js";
+import SoundName from "./enums/SoundName.js";
 
 // Fetch the asset definitions from config.json.
 const {
@@ -72,6 +78,17 @@ function wasdToArrow(key){
 // Add event listeners for player input.
 canvas.addEventListener('keydown', event => {
 	let key = wasdToArrow(event.key);
+	if(key == 'm'){
+		sounds.play(SoundName.Mute);
+		sounds.toggleMute();
+		sounds.play(SoundName.Mute);
+		
+		if(Game.mute)
+			Game.mute = false;
+			
+		else
+			Game.mute = true;
+	}
 	keys[key] = true;
 });
 

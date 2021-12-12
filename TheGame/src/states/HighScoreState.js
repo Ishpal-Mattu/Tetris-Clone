@@ -1,6 +1,8 @@
+import Game from "../../lib/Game.js";
 import State from "../../lib/State.js"
 import ColorScheme from "../enums/ColorScheme.js";
 import GameStateName from "../enums/GameStateName.js";
+import SoundName from "../enums/SoundName.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, sounds, stateMachine } from "../globals.js";
 import HighScoreManager from "../services/HighScoreManager.js";
 
@@ -18,11 +20,13 @@ export default class HighScoreState extends State{
 	}
 
 	update(dt) {
+		this.toggleBackgroundSounds();
 		// Return to the start screen if we press escape.
 		if (keys.Escape) {
 			keys.Escape = false;
 			
-            // TODO play sound representing going back
+			sounds.stop(SoundName.Back);
+            sounds.play(SoundName.Back);
 
 			stateMachine.change(GameStateName.TitleScreen);
 		}
@@ -58,5 +62,12 @@ export default class HighScoreState extends State{
 		context.textAlign = 'center';
 		context.fillText(`Press Escape to return to the main menu!`, CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.8);
 		context.restore();
+	}
+
+	toggleBackgroundSounds(){
+		if(sounds.mute)
+			sounds.pause(SoundName.MenuBackground);
+		else
+			sounds.play(SoundName.MenuBackground);
 	}
 }
