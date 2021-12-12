@@ -8,9 +8,9 @@
 		},
 		{
 			"name": "background",
-			"path": "./assets/images/SkyBackground.jpg",
-			"width": 512,
-			"height": 512
+			"path": "./assets/images/Background.jpg",
+			"width": 700,
+			"height": 700
 		},
 		{
 			"name": "gameFrame",
@@ -71,6 +71,18 @@
 			"path": "./assets/images/title-background.jpg",
 			"width": 1920,
 			"height": 1920
+		},
+		{
+			"name": "gridBackground",
+			"path": "./assets/images/RetroBlockBackground.jpg",
+			"width": 612,
+			"height": 399
+		},
+		{
+			"name": "frameBackground",
+			"path": "./assets/images/Dark-grid-background.png",
+			"width": 350,
+			"height": 700
 		}
 	],
 	"fonts": [

@@ -2,7 +2,7 @@ import Sprite from "../../lib/Sprite.js";
 import ColorScheme from "../enums/ColorScheme.js";
 import ImageName from "../enums/ImageName.js";
 import ShapeType from "../enums/ShapeType.js";
-import { BLOCK_SIZE, canvas, CANVAS_WIDTH, context, images } from "../globals.js";
+import { BLOCK_SIZE, canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, GAME_BOARD_X, GAME_BOARD_Y, images } from "../globals.js";
 import GameBoard from "../objects/GameBoard.js";
 
 export default class UserInterface {
@@ -62,10 +62,17 @@ export default class UserInterface {
 
 
     render(){
+
+        // Render background image
+        images.render(ImageName.Background, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        images.render(ImageName.FrameBackground, GAME_BOARD_X, GAME_BOARD_Y, GAME_BOARD_WIDTH*BLOCK_SIZE, GAME_BOARD_HEIGHT*BLOCK_SIZE);
+
+
         // Draw the game frame, next shape frame & hold shape frame
         this.sprites[this.gameFrameSpriteIndex].render(0, 0);
         this.sprites[this.shapeFrameSpriteIndex].render(this.rightFrameX, this.nextFrameY);
         this.sprites[this.shapeFrameSpriteIndex].render(this.rightFrameX, this.holdFrameY);
+
 
         // Display Next Shape
         const nextShapeRenderX = this.rightFrameInnerX + (this.rightFrameTextWidth - this.gameBoard.nextShape.dimensions.x * BLOCK_SIZE)/2
@@ -85,6 +92,7 @@ export default class UserInterface {
         context.textAlign = "center";
         
         // Display Level, Score & Lines
+        context.fillStyle = "white";
         context.fillText(this.gameBoard.level.toString(), this.leftTextX, this.levelY, this.frameTextWidth);
         context.fillText(this.gameBoard.score.toString(), this.leftTextX, this.scoreY, this.frameTextWidth);
         context.fillText(this.gameBoard.lines.toString(), this.leftTextX, this.lineY, this.frameTextWidth);
@@ -97,7 +105,7 @@ export default class UserInterface {
 
         // Write the title for each info frame
         context.font = "30px LiquidItalic";
-        context.fillStyle = "#6ec6e8";
+        context.fillStyle = ColorScheme.Blue;
         context.fillText("Score", this.leftFrameWidth/2 + this.leftFrameX, this.frameTitleCanvasHeight/2 + this.scoreFrameY, this.leftFrameWidth)
         context.fillText("Level", this.leftFrameWidth/2 + this.leftFrameX, this.frameTitleCanvasHeight/2 + this.levelFrameY, this.leftFrameWidth)
         context.fillText("Lines", this.leftFrameWidth/2 + this.leftFrameX, this.frameTitleCanvasHeight/2 + this.lineFrameY, this.leftFrameWidth)

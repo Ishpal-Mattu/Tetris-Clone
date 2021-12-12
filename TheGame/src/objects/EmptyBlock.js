@@ -1,4 +1,5 @@
 import Vector from "../../lib/Vector.js";
+import ColorScheme from "../enums/ColorScheme.js";
 import { context } from "../globals.js";
 import Block from "./Block.js";
 
@@ -20,9 +21,10 @@ export default class EmptyBlock extends Block{
      */
     render(x, y){
         context.save();
+        context.strokeStyle = ColorScheme.Blue;
 
-        if(this.isGhost)
-            context.globalAlpha = 0.4;
+        
+        context.globalAlpha = 0.1;
         
         context.strokeRect(this.position.x + x, this.position.y + y, this.dimensions.x, this.dimensions.y);
 

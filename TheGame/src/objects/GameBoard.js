@@ -381,12 +381,11 @@ export default class GameBoard {
 
     render(){
 
+        // Render current ghost shape
         this.currentGhostShape.render();
 
         // Renders current shape
         this.currentShape.render();
-
-        
 
         // Renders all grid blocks
         this.renderGridBlocks();
@@ -396,6 +395,7 @@ export default class GameBoard {
      * Renders all blocks in the grid (Empty blocks & placed blocks)
      */
     renderGridBlocks(){
+        
         for(let i = 0; i < this.height; i++){
             for(let j = 0; j<this.width; j++){
                 this.grid[i][j].render(this.x, this.y);

@@ -9,7 +9,9 @@ const ImageName = {
     RedBlock: 'redBlock',
     YellowBlock: 'yellowBlock',
     Title: 'title',
-    GameFrame: 'gameFrame'
+    GameFrame: 'gameFrame',
+    GridBackground: 'gridBackground',
+    FrameBackground: 'frameBackground',
 };
 
 export default ImageName;

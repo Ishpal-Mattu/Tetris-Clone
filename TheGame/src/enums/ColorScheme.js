@@ -3,7 +3,7 @@ const ColorScheme = {
     Orange: "#f68d16",		// Orange
     Yellow: "#fccb22",		// Yellow
     Green: "#53ce3a",		// Green
-    Blue: "#55ecfa",		// Blue
+    Blue:  "#6ec6e8",   //"#55ecfa",		// Blue
     Purple: "#da2ad7", 		// Purple
     White: "White",
 };

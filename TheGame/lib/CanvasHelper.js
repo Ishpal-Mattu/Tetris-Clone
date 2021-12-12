@@ -28,3 +28,28 @@ export const textWrap = (context, text, maxWidth) => {
     lines.push(currentLine);
     return lines;
 }
+
+
+//https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-using-html-canvas
+/**
+ * 
+ * @param {CanvasRenderingContext2D} context 
+ * @param {Number} x 
+ * @param {Number} y 
+ * @param {Number} width 
+ * @param {Number} height 
+ * @param {Number} radius 
+ * @returns 
+ */
+export const roundRect = (context, x, y, width, height, radius) => {
+    if (width < 2 * radius) radius = width / 2;
+    if (height < 2 * radius) radius = height / 2;
+    context.beginPath();
+    context.moveTo(x + radius, y);
+    context.arcTo(x + width, y, x + width, y + height, radius);
+    context.arcTo(x + width, y + height, x, y + height, radius);
+    context.arcTo(x, y + height, x, y, radius);
+    context.arcTo(x, y, x + width, y, radius);
+    context.closePath();
+    return context;
+}
