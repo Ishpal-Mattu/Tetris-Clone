@@ -22,5 +22,3 @@ export const fonts = new Fonts();
 export const stateMachine = new StateMachine();
 export const timer = new Timer();
 export const sounds = new Sounds();
-
-export let mute = false;

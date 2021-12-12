@@ -2,7 +2,6 @@ import {
 	CANVAS_HEIGHT,
 	CANVAS_WIDTH,
 	context,
-	images,
 	keys,
 	sounds,
 	stateMachine,
@@ -13,7 +12,6 @@ import GameStateName from "../enums/GameStateName.js";
 import ColorScheme from "../enums/ColorScheme.js";
 import { roundRect } from "../../lib/CanvasHelper.js";
 import SoundName from "../enums/SoundName.js";
-import Game from "../../lib/Game.js";
 import Confetti from "../objects/Confetti.js";
 import Vector from "../../lib/Vector.js";
 

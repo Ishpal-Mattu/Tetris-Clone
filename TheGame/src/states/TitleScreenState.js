@@ -1,10 +1,8 @@
-import Game from "../../lib/Game.js";
 import State from "../../lib/State.js";
 import ColorScheme from "../enums/ColorScheme.js";
 import GameStateName from "../enums/GameStateName.js";
-import ImageName from "../enums/ImageName.js";
 import SoundName from "../enums/SoundName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, mute, sounds, stateMachine } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, images, keys, sounds, stateMachine } from "../globals.js";
 
 export default class TitleScreenState extends State {
 	constructor() {

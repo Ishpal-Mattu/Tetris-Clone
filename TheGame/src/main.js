@@ -1,26 +1,48 @@
 /**
- * Game Name
+ * Tetris
  *
- * Authors
+ * @author Ishpal Mattu
  *
- * Brief description
+ * Originally developed by Alexey Pajitnov.
+ * Tetris is all about strategically placing the falling tetrominoes to clear rows.
+ * Points are awarded for every row cleared. The next teromino is displayed to help
+ * the player in his placement. A player can also chose to put a tetromino on hold
+ * and retrieve it at a later time.
+ * 
+ * This version is a bit of a mix of the nintendo version (https://arcadespot.com/game/classic-tetris/) 
+ * & the modern tetris online version (https://tetris.com/play-tetris).
  *
  * Asset sources
  * 
  * Images:
  * - Title-tile: <a href="https://www.vecteezy.com/free-vector/ornament">Ornament Vectors by Vecteezy</a>
- * - Gameover Text: <a href="https://www.vecteezy.com/free-vector/green">Green Vectors by Vecteezy</a>
+ * - Confetti: https://opengameart.org/content/confetti-effect-spritesheet
+ * - Block/Game Frame/Frame black grid background images: https://fab08.itch.io/tetris
+ * - Tetris blocks play state background: https://i.ibb.co/YTN069M/tetris.jpg & https://levelup.gitconnected.com/build-a-tetris-game-with-html-canvas-css-and-javascript-on-autocode-132c8346e60c
+ * - Sky Background: https://opengameart.org/content/cartoony-sky
  * 
  * Fonts:
  * - NewTetrisRegular font : https://fontsgeek.com/fonts/NEW-TETRIS-Regular
  * - Tetris2 font: https://www.fontspace.com/tetris-2-font-f11520 
+ * - Joystix: https://www.dafont.com/joystix.font
+ * - tank: https://fab08.itch.io/tetris
+ * - Liquid-Italic: https://fonts2u.com/liquid-italic.font 
+ * - TetrisBlocks20: https://www.fontspace.com/tetris-blocks-20-font-f27655 
+ * - MinecraftEvenings: https://www.fontspace.com/minecraft-evenings-font-f17735 
  * 
  * Sounds:
- * - Most sounds: https://csanyk.itch.io/gmltetris
- * - High score: https://orangefreesounds.com/new-high-score-sound-effect/ 
+ * - https://csanyk.itch.io/gmltetris
+ * 		- fourRowClear
+ * 		- gameOver
+ * 		- levelUp
+ * 		- rotate
+ * 		- rowClear
+ * 		- shapePlace
+ * - highScore: https://orangefreesounds.com/new-high-score-sound-effect/ 
+ * - menu: https://fab08.itch.io/tetris
+ * - gameBackground: https://fab08.itch.io/tetris
+ * 
  */
-
-
 
 import GameStateName from "./enums/GameStateName.js";
 import Game from "../lib/Game.js";
@@ -30,7 +52,6 @@ import {
 	fonts,
 	images,
 	keys,
-	mute,
 	sounds,
 	stateMachine,
 } from "./globals.js";

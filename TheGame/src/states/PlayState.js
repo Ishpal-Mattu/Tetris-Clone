@@ -1,8 +1,7 @@
-import Game from "../../lib/Game.js";
 import State from "../../lib/State.js";
 import GameStateName from "../enums/GameStateName.js";
 import SoundName from "../enums/SoundName.js";
-import { GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, keys, sounds, stateMachine} from "../globals.js";
+import { GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, sounds, stateMachine} from "../globals.js";
 import GameBoard from "../objects/GameBoard.js";
 import HighScoreManager from "../services/HighScoreManager.js";
 import UserInterface from "../services/UserInterface.js";

@@ -1,5 +1,4 @@
 import { roundRect, textWrap } from "../../lib/CanvasHelper.js";
-import Game from "../../lib/Game.js";
 import State from "../../lib/State.js";
 import ColorScheme from "../enums/ColorScheme.js";
 import GameStateName from "../enums/GameStateName.js";
