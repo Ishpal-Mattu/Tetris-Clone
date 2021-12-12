@@ -1,10 +1,7 @@
 import Vector from "../../lib/Vector.js";
 import GameEntity from "./GameEntity.js";
-import Direction from "../enums/Direction.js";
-import GameBoard from "../objects/GameBoard.js";
 import Block from "../objects/Block.js";
 import { GAME_BOARD_X, GAME_BOARD_Y } from "../globals.js";
-import ShapeType from "../enums/ShapeType.js";
 
 export default class Shape extends GameEntity{
     
@@ -19,7 +16,6 @@ export default class Shape extends GameEntity{
         super(dimensions, new Vector(0, 0));
 
         this.isGhost = isGhost;
-        //this.direction = Direction.Up;
         this.tetromino = this.initializeTetrimono();
         this.type = null;
         this.isPlaced = false;

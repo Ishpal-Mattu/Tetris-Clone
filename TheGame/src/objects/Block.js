@@ -1,6 +1,5 @@
 import Sprite from "../../lib/Sprite.js";
 import Vector from "../../lib/Vector.js";
-import Direction from "../enums/Direction.js";
 import ImageName from "../enums/ImageName.js";
 import { context, images, BLOCK_SIZE } from "../globals.js";
 import GameObject from "./GameObject.js";
@@ -37,13 +36,6 @@ export default class Block extends GameObject{
 
         const imageGraphic = images.get(imageName);
         this.sprites = Sprite.generateSpritesFromSpriteSheet(imageGraphic, Block.WIDTH, Block.HEIGHT);
-    }
-
-    onCollision(collider){
-        if(this.getObjectCollisionDirection(collider) === Direction.Down){
-            super.onCollision(collider);
-            this.isPlaced = true;
-        }
     }
 
     update(){
