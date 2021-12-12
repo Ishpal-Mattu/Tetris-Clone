@@ -34,11 +34,10 @@ export default class HighScoreState extends State{
 		context.globalAlpha = 1;
 
 		context.save();
-		context.fillStyle = ColorScheme.Purple;
-		context.font = "48px MinecraftEvenings";
+		context.fillStyle = ColorScheme.Red;
+		context.font = "50px Joystix";
 		context.textAlign = 'center';
 		context.fillText(`🎉 HIGH SCORES 🎉`, CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.15);
-
 
         context.fillStyle = ColorScheme.White;
         context.font = "30px MinecraftEvenings";

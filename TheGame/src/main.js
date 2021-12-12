@@ -57,16 +57,28 @@ stateMachine.add(GameStateName.GameOver, new GameOverState());
 stateMachine.add(GameStateName.EnterHighScore, new EnterHighScoreState());
 stateMachine.add(GameStateName.Play, new PlayState());
 
-stateMachine.change(GameStateName.Play);
+stateMachine.change(GameStateName.Instructions);
+
+function wasdToArrow(key){
+	switch(key){
+		case 'w': return 'ArrowUp';
+		case 's': return 'ArrowDown';
+		case 'a': return 'ArrowLeft';
+		case 'd': return 'ArrowRight';
+		default: return key;
+	}
+}
 
 // Add event listeners for player input.
 canvas.addEventListener('keydown', event => {
-	keys[event.key] = true;
+	let key = wasdToArrow(event.key);
+	keys[key] = true;
 });
 
-// canvas.addEventListener('keyup', event => {
-// 	keys[event.key] = false;
-// });
+canvas.addEventListener('keyup', event => {
+	let key = wasdToArrow(event.key);
+	keys[key] = false;
+});
 
 const game = new Game(stateMachine, context, canvas.width, canvas.height);
 

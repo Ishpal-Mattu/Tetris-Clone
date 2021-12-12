@@ -20,7 +20,7 @@ export default class TitleScreenState extends State {
 	}
 
 	enter(parameters) { 
-		
+		this.highlighted = this.menuOptions.start;
 	}
 
 	exit() { 
@@ -29,14 +29,14 @@ export default class TitleScreenState extends State {
 
 	update(dt) { 
 		// Toggle highlighted option if we press w or s.
-		if(keys.w){
-			keys.w = false;
+		if(keys.ArrowUp){
+			keys.ArrowUp = false;
 			this.highlighted = this.highlighted === this.menuOptions.instructions ? this.menuOptions.highScores : this.highlighted === this.menuOptions.highScores ? this.menuOptions.start : this.menuOptions.instructions;
 			
 			//TODO - Play selection sound
 		}
-		else if(keys.s){
-			keys.s = false;
+		else if(keys.ArrowDown){
+			keys.ArrowDown = false;
 			this.highlighted = this.highlighted === this.menuOptions.instructions ? this.menuOptions.start : this.highlighted === this.menuOptions.start ? this.menuOptions.highScores : this.menuOptions.instructions;
 			
 			//TODO - Play selection sound

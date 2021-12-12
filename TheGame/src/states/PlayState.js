@@ -3,21 +3,22 @@ import State from "../../lib/State.js";
 import GameStateName from "../enums/GameStateName.js";
 import { GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH, keys, stateMachine} from "../globals.js";
 import GameBoard from "../objects/GameBoard.js";
+import HighScoreManager from "../services/HighScoreManager.js";
 import UserInterface from "../services/UserInterface.js";
 
 export default class PlyState extends State {
 	constructor() {
 		super();
-		this.gameBoard = new GameBoard(GAME_BOARD_WIDTH, GAME_BOARD_HEIGHT);
-		this.userInterface = new UserInterface(this.gameBoard);
-		console.log(this.gameBoard.grid);
+		//console.log(this.gameBoard.grid);
 
 		this.deltaTime = 0;
 		//(x,y) => { list[4*y + x] }
 	}
 
 	enter(parameters){
-		
+		this.gameBoard = new GameBoard(GAME_BOARD_WIDTH, GAME_BOARD_HEIGHT);
+		this.userInterface = new UserInterface(this.gameBoard);
+		this.deltaTime = 0;
 	}
 
 	update(dt){
@@ -26,7 +27,12 @@ export default class PlyState extends State {
 		this.userInterface.update();
 
 		if(this.gameBoard.isGameOver){
-			stateMachine.change(GameStateName.EnterHighScore, {gameBoard: this.gameBoard, userInterface: this.userInterface});
+			if(this.wasHighScore(this.gameBoard.score)){
+				stateMachine.change(GameStateName.EnterHighScore, {gameBoard: this.gameBoard, userInterface: this.userInterface});
+			}
+			else{
+				stateMachine.change(GameStateName.GameOver, {score: this.gameBoard.score});
+			}
 		}
 		
 	}
@@ -37,6 +43,10 @@ export default class PlyState extends State {
 	}
 
 	exit(){
-		Game.updateDelay = false;
+		
+	}
+
+	wasHighScore(score) {
+		return HighScoreManager.loadHighScores().some((highScore) => score > highScore.score);
 	}
 }
