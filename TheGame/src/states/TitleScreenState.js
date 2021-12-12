@@ -61,7 +61,7 @@ export default class TitleScreenState extends State {
 	}
 
 	render() { 
-		context.globalAlpha = 0.7;
+		context.globalAlpha = 0.8;
 		images.render("blockBackground", 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.globalAlpha = 1;
 

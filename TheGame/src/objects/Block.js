@@ -55,7 +55,7 @@ export default class Block extends GameObject{
         context.save();
 
         if(this.isGhost)
-            context.globalAlpha = 0.2;
+            context.globalAlpha = 0.25;
         
         this.sprites[this.currentFrame].render(this.position.x + x, this.position.y + y);
 

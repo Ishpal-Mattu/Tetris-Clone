@@ -57,7 +57,7 @@ stateMachine.add(GameStateName.GameOver, new GameOverState());
 stateMachine.add(GameStateName.EnterHighScore, new EnterHighScoreState());
 stateMachine.add(GameStateName.Play, new PlayState());
 
-stateMachine.change(GameStateName.Instructions);
+stateMachine.change(GameStateName.TitleScreen);
 
 function wasdToArrow(key){
 	switch(key){

@@ -39,6 +39,10 @@ export default class GameOverState extends State {
 		context.textAlign = 'center';
 		context.fillText(`Game Over`, CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.15);
 
+		context.font = "30px Joystix";
+		context.fillText(`Final Score: ${this.score}`, CANVAS_WIDTH * 0.5, CANVAS_HEIGHT * 0.2);
+
+
 		context.font = "40px Joystix";
 		context.fillStyle = 'white'   //'#5098c4';
 		const highScoreX = CANVAS_WIDTH / 4.5;

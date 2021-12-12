@@ -44,7 +44,7 @@ export default class EnterHighScoreState extends State {
 
 			HighScoreManager.addHighScore(name, this.score);
 
-			stateMachine.change(GameStateName.GameOver);
+			stateMachine.change(GameStateName.GameOver, {score: this.score});
 		}
 
 		// Scroll through character slots.

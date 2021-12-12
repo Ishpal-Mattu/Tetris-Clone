@@ -88,7 +88,7 @@ export default class InstructionsState extends State {
         textXFraction = 0.5;
         context.font = "40px Joystix";
         context.fillStyle = ColorScheme.Yellow;
-        context.fillText("Tips", CANVAS_WIDTH * textXFraction, CANVAS_HEIGHT * 0.6);
+        context.fillText("Tips💡", CANVAS_WIDTH * textXFraction, CANVAS_HEIGHT * 0.6);
         
         context.font = "13px Joystix";
         context.fillStyle = ColorScheme.White;
