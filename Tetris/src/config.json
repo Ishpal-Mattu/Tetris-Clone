@@ -1,0 +1,213 @@
+{
+	"images": [
+		{
+			"name": "title",
+			"path": "./assets/images/title.png",
+			"width": 489,
+			"height": 168
+		},
+		{
+			"name": "background",
+			"path": "./assets/images/Background.jpg",
+			"width": 700,
+			"height": 700
+		},
+		{
+			"name": "gameFrame",
+			"path": "./assets/images/GameFrame.png",
+			"width": 801,
+			"height": 800
+		},
+		{
+			"name": "blackBlock",
+			"path": "./assets/images/blockBlack.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "blueBlock",
+			"path": "./assets/images/blockBlue.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "greenBlock",
+			"path": "./assets/images/blockGreen.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "lightBlueBlock",
+			"path": "./assets/images/blockLightblue.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "orangeBlock",
+			"path": "./assets/images/blockOrange.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "purpleBlock",
+			"path": "./assets/images/blockPurple.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "redBlock",
+			"path": "./assets/images/blockRed.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "yellowBlock",
+			"path": "./assets/images/blockYellow.png",
+			"width": 35,
+			"height": 35
+		},
+		{
+			"name": "blockBackground",
+			"path": "./assets/images/title-background.jpg",
+			"width": 1920,
+			"height": 1920
+		},
+		{
+			"name": "gridBackground",
+			"path": "./assets/images/RetroBlockBackground.jpg",
+			"width": 612,
+			"height": 399
+		},
+		{
+			"name": "frameBackground",
+			"path": "./assets/images/Dark-grid-background.png",
+			"width": 350,
+			"height": 700
+		},
+		{
+			"name": "confetti",
+			"path": "./assets/images/Confetti.png",
+			"width": 4096,
+			"height": 4096
+		}
+	],
+	"fonts": [
+		{
+			"name": "Joystix",
+			"path": "./assets/fonts/Joystix.ttf"
+		},
+		{
+			"name": "MinecraftEvenings",
+			"path": "./assets/fonts/MinecraftEvenings.otf"
+		},
+		{
+			"name": "Tank",
+			"path": "./assets/fonts/tank.ttf"
+		},
+		{
+			"name": "Tetris2",
+			"path": "./assets/fonts/Tetris2-VP0w.ttf"
+		},
+		{
+			"name": "NewTetrisRegular",
+			"path": "./assets/fonts/NewTetrisRegular.ttf"
+		},
+		{
+			"name": "TetrisBlocks2",
+			"path": "./assets/fonts/TetrisBlocks20-oKwA.otf"
+		},
+		{
+			"name": "LiquidItalic",
+			"path": "./assets/fonts/Liquid-Italic.ttf"
+		}
+
+	],
+	"sounds": [
+		{
+			"name": "explosion",
+			"path": "./assets/sounds/explosion.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "menuBackground",
+			"path": "./assets/sounds/menu.ogg",
+			"size": 1,
+			"volume": 0.08,
+			"loop": true
+		},
+		{
+			"name": "gameBackground",
+			"path": "./assets/sounds/gameBackground.wav",
+			"size": 1,
+			"volume": 0.06,
+			"loop": true
+		},
+		{
+			"name": "shapePlace",
+			"path": "./assets/sounds/shapePlace.ogg",
+			"size": 1,
+			"volume": 0.2
+		},
+		{
+			"name": "confirm",
+			"path": "./assets/sounds/confirm.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "fourRowClear",
+			"path": "./assets/sounds/fourRowClear.ogg",
+			"size": 5,
+			"volume": 0.2
+		},
+		{
+			"name": "levelUp",
+			"path": "./assets/sounds/levelUp.ogg",
+			"size": 10,
+			"volume": 0.2
+		},
+		{
+			"name": "mute",
+			"path": "./assets/sounds/mute.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "no-select",
+			"path": "./assets/sounds/no-select.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "rotate",
+			"path": "./assets/sounds/rotate.ogg",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "rowClear",
+			"path": "./assets/sounds/rowClear.ogg",
+			"size": 10,
+			"volume": 0.2
+		},
+		{
+			"name": "select",
+			"path": "./assets/sounds/select.wav",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "gameOver",
+			"path": "./assets/sounds/gameOver.ogg",
+			"size": 1,
+			"volume": 0.1
+		},
+		{
+			"name": "highScore",
+			"path": "./assets/sounds/highScore.mp3",
+			"size": 1,
+			"volume": 0.1
+		}
+	]
+}
